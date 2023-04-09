@@ -1,0 +1,24 @@
+{
+  "name": "meicanhong.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meicanhong/meicanhong.github.io.git"
+  },
+  "author": "meicanhong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meicanhong/meicanhong.github.io/issues"
+  },
+  "homepage": "https://github.com/meicanhong/meicanhong.github.io#readme",
+  "devDependencies": {
+    "vuepress": "^1.9.9",
+    "vuepress-theme-reco": "^1.6.17"
+  }
+}
