@@ -2,7 +2,7 @@
 title: Trino 409 Sorted Table 性能测试报告
 date: '2023-03-21'
 categories:
-- big-data
+- Big-Data
 tags:
 - Trino
 ---
