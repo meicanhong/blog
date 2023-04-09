@@ -1,6 +1,5 @@
 ---
 title: Flink SQL 带你玩转实时数据
-author: Danny
 date: '2023-03-28'
 ---
 ## 前言
