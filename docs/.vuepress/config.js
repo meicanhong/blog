@@ -1,6 +1,6 @@
 module.exports = {
-    title: '...',
-    description: '...',
+    title: 'Danny Blog',
+    description: '看到、想到、见到',
     theme: 'reco',
     base: '/blog/',
     dest: './site',
@@ -19,23 +19,16 @@ module.exports = {
         ],
         sidebar: [
             {
-                title: '欢迎学习',
-                path: '/',
-                collapsable: false, // 不折叠
+                title: 'Big Data',
+                collapsable: true,
+                sidebarDepth: 3,
                 children: [
-                    { title: "学前必读", path: "/" }
+                    '/big-data/Flink SQL 带你玩转实时数据.md',
+                    '/big-data/Trino Master OOM 排查记录',
+                    '/big-data/Iceberg 数据治理及查询加速',
+                    '/big-data/Trino Worker 规避 OOM 思路',
                 ]
             },
-            {
-                title: "Flink",
-                path: '/blog/Flink SQL 带你玩转实时数据.md',
-                collapsable: false, // 不折叠
-                // children: [
-                //     { title: "条件类型", path: "/handbook/ConditionalTypes" },
-                //     { title: "泛型", path: "/handbook/Generics" }
-                // ],
-            }
         ],
-        subSideBar: 'auto'
     }
 }

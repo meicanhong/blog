@@ -4,7 +4,8 @@ author: Danny
 date: '2023-03-28'
 ---
 ## 前言
-今天分享的主题是 Flink SQL 带你玩转实时数据。在开始之前，我想说一下，目前国内越来越多一线互联网公司选择使用 Flink SQL 的方式来生产实时指标，而最近团队也刚好用 Flink SQL 完成了第一批的实时银指标生产，未来会有越来越多的实时指标需要上线，到时候需要各位同学帮忙。所以今天打算通过本场分享，让各位同学掌握 Flink SQL 的基础玩法，能够使用 Flink SQL 生产实时指标。
+今天分享的主题是 Flink SQL 带你玩转实时数据。最近团队用 Flink SQL 完成了实时银指标生产，未来会有越来越多的实时指标需要上线，到时候需要各位同学帮忙。所以今天打算通过本场分享，让各位同学掌握 Flink SQL 的基础玩法，能够使用 Flink SQL 生产实时指标。
+
 我先进行自我介绍，我是 Danny，New Team 的大数据架构工程师，Footprint 的大数据架构实施者。经常和团队冲锋在技术第一线，不是在坑里就是在走向坑的路上。最近刚从 Flink 这个深坑里出来，一路波折，取得真经，下面由我来传经。
 首先请各位同学思考以下问题：
 
@@ -40,7 +41,7 @@ group by token_address
 流计算的难点主要是由无限的数据和数据没有边界带来的，那有没有一个东西能将流数据变成 "有限" 和 "有边界" 的数据呢？
 那肯定是有的，Flink 带来了一个叫时间窗口的东西，他能够赋予流数据边界。
 那时间窗口是怎么做到的呢？Flink 将数据分派到符合的窗口上，时间窗口有开始时间和结束时间。例如现在有一个时间窗口是 12:00 ~ 12:05 时间段的，那么这个窗口只接收 12:00 ~ 12:05 期间内的数据。当这个时间窗口过期后，窗口内的数据会被释放掉，也就是释放掉了一些内存空间。这样一来，使用的内存得以被控制，不至于无限膨胀。
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/21385292/1680013982749-466eac28-8c45-482b-ab26-350dfffa63c7.png#averageHue=%23f9f9f9&clientId=u7fa6a8e7-8eaf-4&from=paste&height=353&id=u85de8c9a&name=image.png&originHeight=770&originWidth=1268&originalType=binary&ratio=2&rotation=0&showTitle=false&size=113091&status=done&style=none&taskId=u23c30c08-722e-47b1-afc5-1482a405971&title=&width=582)
+![image.png](./img/img_5.png)
 ### 状态
 前文 SQL 中的 group by 操作会将很多分组信息放在内存中，这些中间计算结果就是 Flink 中的状态。Flink SQL 可以定期地将状态 State 存储到磁盘中，存储到磁盘中的状态叫 CheckPoint。当 Flink 程序崩溃后，只需找到磁盘中最新的 Checkpoint 即可恢复状态，这样子就可以不用从头算起。
 btw，像 Flink SQL 写 Iceberg 的程序，一定要开启 Checkpoint，不然在 Iceberg 上是查不到写入数据的。是因为 Flink 在提交 Checkpoint 时也向 Iceberg 提交新的 Snapshot。
