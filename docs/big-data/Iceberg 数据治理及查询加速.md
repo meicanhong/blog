@@ -88,7 +88,7 @@ CALL catalog.system.rewrite_data_files(
   sort_order => 'team ASC NULLS LAST, name DESC NULLS FIRST'
 )
 ```
-![image.png](./img/img_01.png)
+![image.png](./img/img_6.png)
 #### Z-Order
 虽然 Order 排序可以同时对多列进行排序，但其列与列之间的排序是有先后顺序之分的，像是 MySQL 里的联合索引，先对 字段A 排序再对 字段B 排序。如果只是的查询的谓词只包含 字段B，则上述索引失效（先对 字段A 排序再对 字段B 排序)。
 而 Z-Order 能解决上面的问题，使用 Z-Order 对多列排序，列与列之间的排序权重相同。所以使用 Z-Order 对多字段进行排序，查询中只要谓词命中了 Z-Order 中其中任何一字段，都能加速查询。
