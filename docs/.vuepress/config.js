@@ -3,6 +3,7 @@ module.exports = {
     description: '...',
     theme: 'reco',
     base: '/blog/',
+    dest: './dist',
     locales: {
         '/': {
             lang: 'zh-CN'
