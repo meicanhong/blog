@@ -2,6 +2,10 @@
 title: Iceberg 数据治理及查询加速
 author: Danny
 date: '2023-02-25'
+categories:
+- Big-Data
+tags:
+- Iceberg
 ---
 ## 数据治理
 ### Flink 实时写入 Iceberg 带来的问题

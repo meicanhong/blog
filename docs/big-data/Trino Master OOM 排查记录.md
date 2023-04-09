@@ -2,6 +2,10 @@
 title: Trino Master OOM 排查记录
 author: Danny
 date: '2023-03-13'
+categories:
+- Big-Data
+tags:
+- Trino
 ---
 ## 背景
 最近线上的 trino 集群 master 节点老是因为 OOM crash，我们注意到 trino crash 前集群正在运行的查询数量正常，不太像是因为并发查询数据太多导致的 OOM。遂配置 trino master 的 jvm，使其在崩溃后生成一份 dump 文件，方便我们进行问题

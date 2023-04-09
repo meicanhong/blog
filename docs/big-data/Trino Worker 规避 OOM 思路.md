@@ -2,6 +2,10 @@
 title: Trino Worker 规避 OOM 思路
 author: Danny
 date: '2022-10-26'
+categories:
+- Big-Data
+tags:
+- Trino
 ---
 ## 理解 Trino 内存管理
 Trino 内存管理是由 Master Coordinator 来做的

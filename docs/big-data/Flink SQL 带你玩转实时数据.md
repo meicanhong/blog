@@ -1,6 +1,10 @@
 ---
 title: Flink SQL 带你玩转实时数据
 date: '2023-03-28'
+categories:
+- Big-Data
+tags:
+- Flink
 ---
 ## 前言
 今天分享的主题是 Flink SQL 带你玩转实时数据。最近团队用 Flink SQL 完成了实时银指标生产，未来会有越来越多的实时指标需要上线，到时候需要各位同学帮忙。所以今天打算通过本场分享，让各位同学掌握 Flink SQL 的基础玩法，能够使用 Flink SQL 生产实时指标。

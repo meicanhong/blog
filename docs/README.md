@@ -1,4 +1,4 @@
 ---
 home: true
-heroText: Danny Blog
+heroText: Danny's Blog
 ---
