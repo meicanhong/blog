@@ -13,6 +13,7 @@ module.exports = {
         type: 'blog',
         author: 'Danny',
         authorAvatar: '/avatar.jpg',
+        subSidebar: 'auto',
         nav: [
             {
                 text: 'TimeLine',
