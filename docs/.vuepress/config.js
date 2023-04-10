@@ -21,6 +21,10 @@ module.exports = {
                 icon: 'reco-date',
             },
             {
+                text: 'About Me',
+                link: '/myself/about_me.md'
+            },
+            {
                 text: 'Github',
                 link: 'https://github.com/meicanhong'
             }
