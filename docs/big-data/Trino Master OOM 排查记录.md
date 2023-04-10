@@ -32,6 +32,46 @@ tags:
 
 ## 解决方案
 使用 trino 的小文件合并功能，重写底层数据文件即可修复。
-> **ALTER TABLE **nft_orders_v2 **EXECUTE **optimize (file_size_threshold => '100MB')
+> ALTER TABLE nft_orders_v2 EXECUTE optimize (file_size_threshold => '100MB')
 
 为了规避此类问题再次分析，还需要找出哪些查询的查询计划时间大于 10s，找出这些查询并分析用到的表的元数据是否合理，不合理要及时修正。
+
+我们通过 dbt-trino 方式，实现找到 iceberg 下元数据不合理的表。
+```sql
+{{ config(
+    materialized = 'table',
+    on_table_exists = 'drop'
+)}}
+
+{% set table_list = []%}
+{%- call statement('get_table_list', fetch_result=True) -%}
+    SET SESSION query_max_stage_count = 500;
+    select *
+    from iceberg.information_schema.tables
+    where table_catalog = 'iceberg'
+    and table_schema in ('prod_bronze', 'prod_silver', 'prod_gold')
+    and table_type != 'VIEW'
+    and regexp_extract(table_name, 'test|tmp|duplicate') is null
+    and table_name != 'partition_scan'
+{%- endcall -%}
+{%- if execute -%}
+    {%- set result_list = load_result('get_table_list')['data']-%}
+    {%- for table_tup in result_list -%}
+        {%- set table_name_tup = table_tup[2] -%}
+        {%- do table_list.append( 'iceberg.' + table_tup[1] + '."' + table_name_tup + '$snapshots"')-%}
+    {%- endfor -%}
+{%- endif -%}
+
+{% for table_name in table_list %}
+    select
+        '{{table_name}}' as table_name,
+        json_value(json_format(cast(summary as json)), 'lax $."total-delete-files"') as "total-delete-files",
+        json_value(json_format(cast(summary as json)), 'lax $."total-position-deletes"') as "total-position-deletes",
+        json_value(json_format(cast(summary as json)), 'lax $."total-equality-deletes"') as "total-equality-deletes",
+        cast(committed_at as timestamp(6)) as committed_at
+    from {{table_name}}
+    {% if not loop.last %} union all {% endif %}
+{% endfor %}
+```
+
+通过此 dbt，我们可以发现哪些表的 Delete File 数量过多，需要及时修复。
