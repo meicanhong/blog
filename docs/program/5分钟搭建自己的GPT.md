@@ -7,13 +7,13 @@ tags:
 - AI
 ---
 
-跟着 https://github.com/Yidadaa/ChatGPT-Next-Web 这个项目，5分钟搭建自己的GPT聊天机器人。
+跟着 [ChatGPT-Next-Web](https://github.com/Yidadaa/ChatGPT-Next-Web) 这个项目，5分钟搭建自己的GPT聊天机器人。
 
 使用 Vercel 部署，免费，不用搭建服务器。
 
 步骤:
 1. [获取 OpenAI Key](https://platform.openai.com/account/api-keys) 
-2. [Deploy In Vercel](Deploy In Vercel)
+2. [Deploy In Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FYidadaa%2FChatGPT-Next-Web&env=OPENAI_API_KEY&env=CODE&project-name=chatgpt-next-web&repository-name=ChatGPT-Next-Web)
    1. 输入 OpenAI Key
    2. Code 是你给这个服务定义的密码，用于访问这个服务
 3. Enjoy
