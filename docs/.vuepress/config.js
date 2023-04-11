@@ -25,6 +25,10 @@ module.exports = {
                 link: '/myself/about_me.md'
             },
             {
+                text: 'My GPT',
+                link: 'http://117.50.185.73/'
+            },
+            {
                 text: 'Github',
                 link: 'https://github.com/meicanhong'
             }
