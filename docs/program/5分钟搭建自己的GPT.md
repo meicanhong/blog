@@ -19,4 +19,5 @@ tags:
 3. Enjoy
 
 部署完成后即可打开自己的GPT服务,打开设置输入访问密码(上文的 Code)即可使用
-![img](img/img_2.png)
+
+![image.png](./img/img_2.png)
