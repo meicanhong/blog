@@ -4,6 +4,9 @@ module.exports = {
     theme: 'reco',
     base: '/blog/',
     dest: './site',
+    head: [
+        ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ],
     locales: {
         '/': {
             lang: 'zh-CN'
@@ -12,6 +15,7 @@ module.exports = {
     themeConfig: {
         type: 'blog',
         author: 'Danny',
+        logo: '/avatar.jpg',
         authorAvatar: '/avatar.jpg',
         subSidebar: 'auto',
         nav: [
@@ -22,7 +26,7 @@ module.exports = {
             },
             {
                 text: 'About Me',
-                link: '/myself/about_me.md'
+                link: '/mythink/about_me.md'
             },
             {
                 text: 'My GPT',
