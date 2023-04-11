@@ -4,7 +4,7 @@ date: '2023-04-11'
 categories:
 - Program
 tags:
-- ai
+- AI
 ---
 
 跟着 https://github.com/Yidadaa/ChatGPT-Next-Web 这个项目，5分钟搭建自己的GPT聊天机器人。
