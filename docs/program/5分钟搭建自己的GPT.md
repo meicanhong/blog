@@ -9,6 +9,7 @@ tags:
 
 跟着 [ChatGPT-Next-Web](https://github.com/Yidadaa/ChatGPT-Next-Web) 这个项目，5分钟搭建自己的GPT聊天机器人。
 
+## Vercel 部署
 使用 Vercel 部署，免费，不用搭建服务器。
 
 步骤:
@@ -23,3 +24,14 @@ tags:
 ![image.png](./img/img_2.png)
 
 自己花了点时间在国内的一台服务器上搭建了一个 [ChatGPT 服务](http://117.50.185.73/)，方便国内的小白使用(不用走代理)
+
+## Docker 部署
+```shell
+docker pull yidadaa/chatgpt-next-web
+
+docker run -d -p 3000:3000 \
+   -e OPENAI_API_KEY="sk-xxxx" \
+   -e CODE="your-password" \
+   --name chatgpt \
+   yidadaa/chatgpt-next-web
+```
