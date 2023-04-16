@@ -15,7 +15,6 @@ module.exports = {
     themeConfig: {
         type: 'blog',
         author: 'Danny',
-        // logo: '/avatar.jpg',
         authorAvatar: '/avatar.jpg',
         subSidebar: 'auto',
         nav: [
