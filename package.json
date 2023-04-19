@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "docs": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "docs": "export NODE_OPTIONS=--openssl-legacy-provider && vuepress dev docs",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && vuepress build docs"
   },
   "repository": {
     "type": "git",
