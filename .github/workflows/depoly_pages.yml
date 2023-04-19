@@ -18,13 +18,9 @@ jobs:
         with:
           persist-credentials: false
 
-      # 设置 SSH
-      - name: Setup SSH
-        run: export NODE_OPTIONS=--openssl-legacy-provider
-
       # 生成静态文件
       - name: Build
-        run: npm install && npm run build
+        run: export NODE_OPTIONS=--openssl-legacy-provider && npm install && npm run build
 
       # 部署到 GitHub Pages
       - name: Deploy
