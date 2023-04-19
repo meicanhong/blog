@@ -24,7 +24,7 @@ jobs:
 
       # 设置 SSH
       - name: Setup SSH
-        uses: export NODE_OPTIONS=--openssl-legacy-provider
+        run: export NODE_OPTIONS=--openssl-legacy-provider
 
       # 部署到 GitHub Pages
       - name: Deploy
