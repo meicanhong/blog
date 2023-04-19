@@ -14,6 +14,6 @@ git checkout -b main
 git add -A
 git commit -m 'deploy'
 
-git push -f git@github.com:meicanhong/blog.git main:pages
+git push -f git@github.com:meicanhong/blog.git main:gh-pages
 
 cd -
