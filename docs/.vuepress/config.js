@@ -19,6 +19,11 @@ module.exports = {
         subSidebar: 'auto',
         nav: [
             {
+                text: 'Philosophy',
+                link: 'https://meicanhong.github.io/blog/categories/Philosophy/',
+                icon: 'reco-date',
+            },
+            {
                 text: 'TimeLine',
                 link: '/timeline/',
                 icon: 'reco-date',
