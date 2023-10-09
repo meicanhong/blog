@@ -1,3 +1,11 @@
+---
+title: 基于 LLM 搭建 Crypto AI 分享
+date: '2023-09-29'
+categories:
+- Program
+tags:
+- LLM
+---
 # 基于 LLM 搭建 Crypto AI 分享
 
 项目在线地址：[https://ai.footprint.network/](https://ai.footprint.network/)
