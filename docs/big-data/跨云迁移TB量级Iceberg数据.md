@@ -1,5 +1,12 @@
-# 跨云迁移TB量级Iceberg数据
-
+---
+title: 跨云迁移TB量级Iceberg数据
+date: '2023-03-28'
+categories:
+- Big-Data
+tags:
+- Spark
+- Iceberg
+---
 ## 背景
 
 为了降本增效，我们要将谷歌云上面的数据和服务迁移至腾讯云，其中包括 30TB 左右的 Iceberg 数据。Iceberg 数据要从 GCS 迁移到腾讯云的 EMR HDFS 上。本文是此次记录迁移过程及分享期间遇到的问题及解决方案。
