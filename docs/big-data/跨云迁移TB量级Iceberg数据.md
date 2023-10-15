@@ -11,11 +11,14 @@ tags:
 
 为了降本增效，我们要将谷歌云上面的数据和服务迁移至腾讯云，其中包括 30TB 左右的 Iceberg 数据。Iceberg 数据要从 GCS 迁移到腾讯云的 EMR HDFS 上。本文是此次记录迁移过程及分享期间遇到的问题及解决方案。
 
-## 迁移过程
+## 迁移工具
 
 我们使用腾讯云 EMR 的 Spark 集群完成了数据迁移。
 
-### Spark 配置
+- Spark 3.3_2.12
+- Iceberg 1.1.0
+
+## Spark 配置
 
 Spark 需要配置读取 GCS 文件和读 Iceberg 表：
 
@@ -45,7 +48,7 @@ spark.sql.catalog.gcp_iceberg.uri  thrift://ip:port
 
 验证配置是否生效，可以在 spark 节点上执行 spark-sql，打开 spark sql 的客户端，简单执行查询下俩边的 iceberg 表和进行插入操作，判断是否读写都有权限。
 
-### 迁移问题及解决方案
+## 迁移问题及解决方案
 
 我们迁移的 Iceberg 表大部分都是按月分区或按日分区，然后有配置 sort order 键排序写入的。
 
