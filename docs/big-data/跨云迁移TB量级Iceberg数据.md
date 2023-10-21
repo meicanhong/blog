@@ -90,6 +90,16 @@ select * from gcp_iceberg.prod_bronze.sui_transaction_blocks
     - `none`：spark 需要根据分区值对数据进行排序。数据必须在每个 Spark 任务内或在整个数据集中全局排序。
     - `hash`：spark 会对每行数据的分区值进行哈希处理，根据哈希结果分配到不同的 executor 中。
 
+### Iceberg 小文件太多
+我们在同步一张 4G 的表时，发现同步速度很慢，同步一张 4G 的表需要耗时30分钟。打开 Spark Job 分析任务的 Stage，发现读取 Iceberg 数据源的 Task 有 2000 个。每个 Task 做的事情都是从读取 GCP iceberg 的一个数据文件 load 回 Spark 中。
+然后我们查看了这张 Iceberg 表的文件数量和文件大小，发现全是小文件。
+
+为了解决小文件的问题，我们可以通过 Trino 或 Spark 进行小文件合并，注意要在同一个云服务内进行合并，不要跨云进行文件合并。
+Spark 合并小文件 SQL 参考：
+```sql
+CALL catalog_name.system.rewrite_data_files('db.sample')
+```
+
 ### 瓶颈分析
 
 此次同步过程中，依赖到 GCS、HDFS、Spark 三个集群，当同步速度慢时，我们需要分析集群内的短板，网络带宽，磁盘速率等因素。
@@ -103,4 +113,5 @@ select * from gcp_iceberg.prod_bronze.sui_transaction_blocks
 
 - 大表需要考虑按分区同步，让同步更轻更快。
 - iceberg 表配置 `write.distribution-mode=hash`，避免 spark partition sort 操作，根据 hash 更快完成分区。
+- 需要留意同步的 Iceberg 小文件数量是否异常，如果异常需要进行合并
 - 同步慢时需分析 spark job 和集群资源消耗状况。
