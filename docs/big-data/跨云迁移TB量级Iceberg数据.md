@@ -44,6 +44,10 @@ spark.sql.catalog.tx_iceberg.uri  thrift://ip:port
 spark.sql.catalog.gcp_iceberg  org.apache.iceberg.spark.SparkCatalog
 spark.sql.catalog.gcp_iceberg.type  hive
 spark.sql.catalog.gcp_iceberg.uri  thrift://ip:port
+
+spark.executor.instances = 10
+spark.executor.cores = 30
+spark.executor.memory = 120g
 ```
 
 验证配置是否生效，可以在 spark 节点上执行 spark-sql，打开 spark sql 的客户端，简单执行查询下俩边的 iceberg 表和进行插入操作，判断是否读写都有权限。
