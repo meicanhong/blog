@@ -34,6 +34,32 @@ VPS 购买地址:
 
 参考：https://github.com/233boy/v2ray
 
+## 配置证书
+先购买域名，然后在域名服务商那里配置域名解析，将域名解析到 VPS 的 IP 上
+
+然后需要在 VPS 上签一个证书，使用 Let's Encrypt 来签 一个证书。使用 Let's Encrypt 证书你需要在服务器上安装一个 certbot，点击 certbot 这个链接，你可以选择你的服务器，操作系统，然后就跟着指令走吧。
+
+接下来，你需要申请一个证书（我们使用standalone的方式，然后，你需要输入你的电子邮件和你解析到 VPS 的域名）：
+
+```bash
+sudo certbot certonly --standalone
+```
+
+证书默认生成在 /etc/letsencrypt/live/<YOUR.DOMAIN.COM/> 目录下，这个证书90天后就过期，所以我们要配置自动更新证书。
+
+创建一个 shell 脚本，用来自动更新证书：
+
+```bash
+/usr/bin/certbot renew --force-renewal
+docker restart gost
+```
+
+使用命令 `crontab -e` 来开启定时任务
+
+```bash
+0 0 1 * * sh /root/cron_renew_ssl.sh
+```
+
 ## Gost
 
 ### **Gost 协议搭建**
