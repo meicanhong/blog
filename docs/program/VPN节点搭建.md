@@ -17,8 +17,13 @@ VPS 购买地址:
 - 2C2G [https://my.racknerd.com/aff.php?aff=8055&pid=76](https://my.racknerd.com/aff.php?aff=8055&pid=768)
 - 4C4G [https://my.racknerd.com/aff.php?aff=8055&pid=73](https://my.racknerd.com/aff.php?aff=8055&pid=737)
 
-## 域名购买
+## 域名
+### 域名购买
 推荐国内的云，6元能买到一个一年的域名
+### 域名停靠 cloudflare
+1. 在 cf 上 new site，输入域名，选择 free plan
+2. 在买的域名服务商那里，将域名解析到 cf 提供的 ns 上
+3. 在 cf 上添加 A 记录，将域名解析到 VPS 的 IP 上，注意要关闭 cloudflare 的代理
 
 ## V2ray
 
