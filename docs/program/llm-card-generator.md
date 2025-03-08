@@ -1,8 +1,10 @@
 ---
 title: "AI驱动的精美卡片生成器：利用LLM创造分享价值"
-date: "2023-11-15"
-author: "卡片设计师"
-tags: ["AI", "LLM", "卡片设计", "HTML", "社交媒体"]
+date: "2025-03-08"
+categories:
+- Program
+tags:
+- AI
 ---
 
 # AI驱动的精美卡片生成器：让内容分享更具视觉冲击力
