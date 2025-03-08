@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>AI驱动的精美卡片生成器：利用LLM创造分享价值 | Danny Blog</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/blog/favicon.ico">
+    <meta name="description" content="看见 思考 行动">
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.f2fa720d.css" as="style"><link rel="preload" href="/blog/assets/js/app.4d4e636d.js" as="script"><link rel="preload" href="/blog/assets/js/3.a5d06c5b.js" as="script"><link rel="preload" href="/blog/assets/js/1.b21f7e85.js" as="script"><link rel="preload" href="/blog/assets/js/46.4491da7a.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.74d1609d.js"><link rel="prefetch" href="/blog/assets/js/11.a67ba7f3.js"><link rel="prefetch" href="/blog/assets/js/12.58448d2a.js"><link rel="prefetch" href="/blog/assets/js/13.fa57db26.js"><link rel="prefetch" href="/blog/assets/js/14.c057a3ec.js"><link rel="prefetch" href="/blog/assets/js/15.68d9d599.js"><link rel="prefetch" href="/blog/assets/js/16.cfee95ce.js"><link rel="prefetch" href="/blog/assets/js/17.5d7af53b.js"><link rel="prefetch" href="/blog/assets/js/18.c821cd45.js"><link rel="prefetch" href="/blog/assets/js/19.ce66bbe6.js"><link rel="prefetch" href="/blog/assets/js/20.10c5cbb0.js"><link rel="prefetch" href="/blog/assets/js/21.4e18a170.js"><link rel="prefetch" href="/blog/assets/js/22.c525c011.js"><link rel="prefetch" href="/blog/assets/js/23.d6c58052.js"><link rel="prefetch" href="/blog/assets/js/24.f93f8e74.js"><link rel="prefetch" href="/blog/assets/js/25.866052fd.js"><link rel="prefetch" href="/blog/assets/js/26.fbf80b3b.js"><link rel="prefetch" href="/blog/assets/js/27.d61915f6.js"><link rel="prefetch" href="/blog/assets/js/28.c45ca798.js"><link rel="prefetch" href="/blog/assets/js/29.184541b0.js"><link rel="prefetch" href="/blog/assets/js/30.c830f772.js"><link rel="prefetch" href="/blog/assets/js/31.fa070580.js"><link rel="prefetch" href="/blog/assets/js/32.23d54b21.js"><link rel="prefetch" href="/blog/assets/js/33.358f4729.js"><link rel="prefetch" href="/blog/assets/js/34.63a5127e.js"><link rel="prefetch" href="/blog/assets/js/35.ad9585e6.js"><link rel="prefetch" href="/blog/assets/js/36.81a58748.js"><link rel="prefetch" href="/blog/assets/js/37.d89b7a90.js"><link rel="prefetch" href="/blog/assets/js/38.cf102053.js"><link rel="prefetch" href="/blog/assets/js/39.f166498c.js"><link rel="prefetch" href="/blog/assets/js/4.b305fb46.js"><link rel="prefetch" href="/blog/assets/js/40.14dcf9a1.js"><link rel="prefetch" href="/blog/assets/js/41.ff29d32c.js"><link rel="prefetch" href="/blog/assets/js/42.709793a2.js"><link rel="prefetch" href="/blog/assets/js/43.ae4445bd.js"><link rel="prefetch" href="/blog/assets/js/44.2f29e3ee.js"><link rel="prefetch" href="/blog/assets/js/45.c4553281.js"><link rel="prefetch" href="/blog/assets/js/47.3d6739de.js"><link rel="prefetch" href="/blog/assets/js/48.569ddbb9.js"><link rel="prefetch" href="/blog/assets/js/5.0b7c02ff.js"><link rel="prefetch" href="/blog/assets/js/6.dc053dd5.js"><link rel="prefetch" href="/blog/assets/js/7.a546d46e.js"><link rel="prefetch" href="/blog/assets/js/8.53f96c7c.js"><link rel="prefetch" href="/blog/assets/js/9.655c6b6c.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.f2fa720d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>Danny Blog</h3> <p class="description" data-v-59e6cb88>看见 思考 行动</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>Danny</span>
+          
+        <!---->
+        2025
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">Danny Blog</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/categories/Big-Data/" class="nav-link"><i class="undefined"></i>
+  Big-Data
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/Life/" class="nav-link"><i class="undefined"></i>
+  Life
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/Philosophy/" class="nav-link"><i class="undefined"></i>
+  Philosophy
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/Program/" class="nav-link"><i class="undefined"></i>
+  Program
+</a></li></ul></div></div><div class="nav-item"><a href="/blog/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="https://meicanhong.github.io/blog/categories/Philosophy/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-date"></i>
+  Philosophy
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="/blog/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><a href="/blog/mythink/about_me.html" class="nav-link"><i class="undefined"></i>
+  About Me
+</a></div><div class="nav-item"><a href="http://117.50.185.73/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  My GPT
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://github.com/meicanhong" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/blog/avatar.jpg" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    Danny
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>34</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>21</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/categories/Big-Data/" class="nav-link"><i class="undefined"></i>
+  Big-Data
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/Life/" class="nav-link"><i class="undefined"></i>
+  Life
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/Philosophy/" class="nav-link"><i class="undefined"></i>
+  Philosophy
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/Program/" class="nav-link"><i class="undefined"></i>
+  Program
+</a></li></ul></div></div><div class="nav-item"><a href="/blog/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="https://meicanhong.github.io/blog/categories/Philosophy/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-date"></i>
+  Philosophy
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="/blog/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><a href="/blog/mythink/about_me.html" class="nav-link"><i class="undefined"></i>
+  About Me
+</a></div><div class="nav-item"><a href="http://117.50.185.73/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  My GPT
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://github.com/meicanhong" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>AI驱动的精美卡片生成器：利用LLM创造分享价值</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>Danny</span>
+          
+        <!---->
+        2025
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">AI驱动的精美卡片生成器：利用LLM创造分享价值</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>卡片设计师</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2023/11/15</span></i> <!----> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>AI</span><span class="tag-item" data-v-8a445198>LLM</span><span class="tag-item" data-v-8a445198>卡片设计</span><span class="tag-item" data-v-8a445198>HTML</span><span class="tag-item" data-v-8a445198>社交媒体</span></i></div></div> <div class="theme-reco-content content__default"><h1 id="ai驱动的精美卡片生成器-让内容分享更具视觉冲击力"><a href="#ai驱动的精美卡片生成器-让内容分享更具视觉冲击力" class="header-anchor">#</a> AI驱动的精美卡片生成器：让内容分享更具视觉冲击力</h1> <p>在当今社交媒体时代，优质的视觉内容往往能获得更多关注和传播。作为开发者，我一直在思考如何让普通用户也能轻松创建专业级别的视觉内容。今天，我很高兴向大家介绍我最新开发的工具——<strong>AI驱动的精美卡片生成器</strong>。</p> <h2 id="项目背景"><a href="#项目背景" class="header-anchor">#</a> 项目背景</h2> <p>社交媒体上的信息爆炸使得优质内容很容易被淹没。一条普通的文字消息可能会被快速滑过，而一张设计精美的卡片却能有效吸引用户的注意力。然而，不是每个人都具备设计技能，也不是每个人都有时间去学习复杂的设计软件。</p> <p>这就是我开发这个工具的初衷——<strong>让每个人都能轻松创建专业级别的视觉内容</strong>。</p> <h2 id="技术原理"><a href="#技术原理" class="header-anchor">#</a> 技术原理</h2> <p>这个工具的核心是利用大型语言模型(LLM)的强大能力，通过精心设计的prompt引导AI生成符合专业设计标准的HTML卡片。整个过程可以概括为：</p> <ol><li><strong>用户输入内容</strong>：用户只需提供想要展示的文本内容</li> <li><strong>AI分析内容</strong>：LLM智能分析内容类型和结构</li> <li><strong>选择最佳模板</strong>：根据内容类型自动选择最适合的卡片模板</li> <li><strong>应用设计规则</strong>：使用Tailwind CSS和专业排版规则进行设计</li> <li><strong>生成HTML代码</strong>：输出完整的、可直接运行的HTML代码</li> <li><strong>渲染为图片</strong>：程序自动将HTML代码渲染为图片</li></ol> <p>整个过程对用户来说是无缝的，他们只需输入内容，几秒钟后就能获得一张设计精美的卡片。</p> <h2 id="支持的卡片类型"><a href="#支持的卡片类型" class="header-anchor">#</a> 支持的卡片类型</h2> <p>该工具支持多种卡片类型，能够满足不同场景的需求：</p> <ul><li><strong>趋势卡片</strong>：展示数据趋势、市场预测等</li> <li><strong>排行榜卡片</strong>：展示各类排名信息</li> <li><strong>知识卡片</strong>：呈现科普知识、技术教程等</li> <li><strong>事件卡片</strong>：展示新闻事件、活动公告等</li> <li><strong>产品卡片</strong>：展示产品介绍、功能亮点等</li> <li><strong>个人资料卡片</strong>：展示个人简介、成就等</li> <li><strong>统计卡片</strong>：展示数据可视化、统计报告等</li> <li><strong>时间线卡片</strong>：展示发展历程、项目进度等</li> <li><strong>引用卡片</strong>：展示名言警句、经典语录等</li> <li><strong>互动卡片</strong>：展示投票统计、用户反馈等</li></ul> <h2 id="使用示例"><a href="#使用示例" class="header-anchor">#</a> 使用示例</h2> <p>假设用户想要创建一张关于&quot;2023年全球AI发展趋势&quot;的卡片，他们只需输入相关内容，系统会自动识别这是一个趋势类型的内容，并应用最适合的设计模板，生成一张包含适当图标、配色和排版的专业卡片。</p> <p>用户获得的不仅是一段HTML代码，而是一张可以直接在社交媒体上分享的精美图片。</p> <h3 id="示例效果"><a href="#示例效果" class="header-anchor">#</a> 示例效果</h3> <p>以下是几种不同类型卡片的效果展示：</p> <h4 id="趋势卡片示例"><a href="#趋势卡片示例" class="header-anchor">#</a> 趋势卡片示例</h4> <p><img src="img/ad3ab25e-e0ea-4505-b731-291d3c14063d.jpeg" alt="趋势卡片示例"></p> <p><em>数据来源：Google Trends</em></p> <h4 id="知识卡片示例"><a href="#知识卡片示例" class="header-anchor">#</a> 知识卡片示例</h4> <p><em>Input</em></p> <p>中国某知识付费平台公布过一组数据：</p> <p>年收入低于10万人民币的人群，购买课程数量是年收入50万人民币以上人群的3倍；</p> <p>但课程完课率，前者不足7%，后者高达35%。</p> <p>穷人不是在买知识，是在买“我在变好”的幻觉。</p> <p>背100个Excel公式，比亲手做100张表简单；
+收藏100篇写作技巧，比每天写500字容易；
+报10门创业课，比摆个煎饼摊轻松多了。</p> <p>穷人最大的认知陷阱，就是把“输入”当“努力”，把“收藏”当“拥有”。</p> <p>真正赚钱的人，都在边流血边总结；
+而穷人在等一份“无痛成功说明书”。</p> <p><img src="img/5f6e27ab-3f2f-4e18-b517-86981c5de1c0.jpeg" alt="知识卡片示例"></p> <h4 id="引用卡片示例"><a href="#引用卡片示例" class="header-anchor">#</a> 引用卡片示例</h4> <p><em>Input</em>
+欲买桂花同载酒，终不似，少年游。</p> <p><img src="img/7db9c73b-8ed5-45b9-ac40-87f91d5b7a66.jpeg" alt="引用卡片示例"></p> <p>这些卡片都是通过相同的工具生成的，只是输入内容和自动选择的模板不同。用户可以根据自己的需求选择不同类型的卡片。</p> <h2 id="技术细节"><a href="#技术细节" class="header-anchor">#</a> 技术细节</h2> <p>该工具使用了以下技术：</p> <ul><li><strong>HTML5 &amp; Tailwind CSS</strong>：实现响应式设计和美观的样式</li> <li><strong>Lucide图标库</strong>：提供丰富的视觉元素</li> <li><strong>大型语言模型</strong>：分析内容并生成HTML代码</li> <li><strong>Playwright</strong>：将HTML渲染并转换为高质量图片</li></ul> <h3 id="技术实现"><a href="#技术实现" class="header-anchor">#</a> 技术实现</h3> <p>整个系统的核心流程包括两个主要部分：HTML生成和图片转换。</p> <h4 id="_1-html生成"><a href="#_1-html生成" class="header-anchor">#</a> 1. HTML生成</h4> <p>首先，我们使用大型语言模型(LLM)来生成符合设计标准的HTML代码。这部分通过精心设计的prompt来引导LLM生成高质量的HTML卡片。</p> <p>以下是驱动这个工具的核心prompt，它指导LLM生成符合专业设计标准的HTML卡片：</p> <div class="language-python extra-class"><pre class="language-python"><code>INFOGRAPHIC_PROMPT_TEMPLATE_CN <span class="token operator">=</span> <span class="token triple-quoted-string string">&quot;&quot;&quot;
+// environment: production
+// please generate the html code in the production environment
+
+## 角色
+你是一位专业的卡片生成助手，能够将用户输入的内容转换为视觉吸引力强的卡片。你能够智能识别用户输入的文本，并根据内容类型应用最佳的排版规则，使每张卡片都具有设计感和专业性。
+用户将把你生成的卡片保存为图片，并在各种社交媒体平台上分享。
+
+## 技术要求
+1. 精通使用HTML5和Tailwind CSS进行卡片设计
+2. 熟悉主流卡片设计规范和最佳实践
+3. 能够处理复杂的文本和图像布局，确保信息传递清晰
+4. 使用Lucide等图标库提供丰富的视觉元素
+5. 使用CDN导入外部依赖
+
+## 卡片类型
+1. 趋势卡片
+   - 数据趋势分析
+   - 市场趋势预测
+   - 热门话题追踪
+   - 用户行为分析
+
+2. 排行榜卡片
+   - 销售排名
+   - 游戏排名
+   - 影视排名
+   - 音乐排名
+   - 图书排名
+
+3. 知识卡片
+   - 科普知识
+   - 技术教程
+   - 历史事件
+   - 百科条目
+   - 专业术语解释
+
+4. 事件卡片
+   - 新闻事件
+   - 活动公告
+   - 重要通知
+   - 里程碑记录
+   - 节日庆祝
+
+5. 产品卡片
+   - 产品介绍
+   - 功能亮点
+   - 价格对比
+   - 使用评测
+   - 新品发布
+
+6. 个人资料卡片
+   - 个人简介
+   - 成就展示
+   - 团队介绍
+   - 访谈记录
+   - 名人语录
+
+7. 统计卡片
+   - 数据可视化
+   - 统计报告
+   - 对比分析
+   - 调查结果
+
+8. 时间线卡片
+   - 发展历程
+   - 项目进度
+   - 重大事件
+   - 日程规划
+
+9. 引用卡片
+   - 名言警句
+   - 经典语录
+   - 诗词歌赋
+   - 文献引用
+
+10. 互动卡片
+    - 投票统计
+    - 调查结果
+    - 用户反馈
+    - 评分展示
+
+## 制作步骤
+1. 收集用户输入的文本内容
+2. 分析文本内容类型并选择最佳卡片类型
+3. 根据内容类型应用最佳排版规则
+4. 使用Tailwind CSS进行卡片设计
+5. 使用Lucide等图标库提供丰富的视觉元素
+6. 使用CDN导入外部依赖
+7. 输出完整的HTML5文档结构，用```html```包裹
+
+## 输出要求
+1. 输出完整的HTML5文档结构，用```html```包裹
+2. 输出的HTML代码应该可以在浏览器中直接运行
+&quot;&quot;&quot;</span>
+</code></pre></div><h4 id="_2-html转图片"><a href="#_2-html转图片" class="header-anchor">#</a> 2. HTML转图片</h4> <p>生成HTML后，我们需要将其转换为可分享的图片。这部分使用了Playwright库来实现，它能够准确渲染HTML并进行高质量截图。以下是核心代码实现：</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">from</span> playwright<span class="token punctuation">.</span>async_api <span class="token keyword">import</span> async_playwright
+
+
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">capture_html_content</span><span class="token punctuation">(</span>
+    <span class="token operator">*</span><span class="token punctuation">,</span> html<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">,</span> width<span class="token punctuation">:</span> <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">428</span><span class="token punctuation">,</span> height<span class="token punctuation">:</span> <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">926</span><span class="token punctuation">,</span> selector<span class="token punctuation">:</span> <span class="token builtin">str</span> <span class="token operator">=</span> <span class="token string">&quot;*&quot;</span>
+<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">bytes</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    Capture a high-quality screenshot of HTML content using Playwright
+
+    Args:
+        html: HTML content string to render and capture
+
+    Returns:
+        bytes: Screenshot image bytes in JPEG format
+    &quot;&quot;&quot;</span>
+    <span class="token keyword">async</span> <span class="token keyword">with</span> async_playwright<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> p<span class="token punctuation">:</span>
+        browser <span class="token operator">=</span> <span class="token keyword">await</span> p<span class="token punctuation">.</span>chromium<span class="token punctuation">.</span>launch<span class="token punctuation">(</span>headless<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+        <span class="token comment"># Set viewport size and increase device scale factor for higher DPI</span>
+        page <span class="token operator">=</span> <span class="token keyword">await</span> browser<span class="token punctuation">.</span>new_page<span class="token punctuation">(</span>
+            viewport<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&quot;width&quot;</span><span class="token punctuation">:</span> width<span class="token punctuation">,</span> <span class="token string">&quot;height&quot;</span><span class="token punctuation">:</span> height<span class="token punctuation">}</span><span class="token punctuation">,</span>
+            device_scale_factor<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span>  <span class="token comment"># 3x DPI for sharper images</span>
+        <span class="token punctuation">)</span>
+
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            <span class="token keyword">await</span> page<span class="token punctuation">.</span>set_content<span class="token punctuation">(</span>html<span class="token punctuation">)</span>
+            <span class="token comment"># Wait for any dynamic content to load</span>
+            <span class="token keyword">await</span> page<span class="token punctuation">.</span>wait_for_load_state<span class="token punctuation">(</span><span class="token string">&quot;networkidle&quot;</span><span class="token punctuation">)</span>
+
+            <span class="token comment"># Get the actual content size</span>
+            content_size <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span>evaluate<span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f&quot;&quot;&quot;() =&gt; {{
+                // Get all div elements
+                const elements = document.querySelectorAll('</span><span class="token interpolation"><span class="token punctuation">{</span>selector<span class="token punctuation">}</span></span><span class="token string">');
+                let maxWidth = 100;  // Minimum width
+                let maxHeight = 100;  // Minimum height
+                
+                // Calculate maximum dimensions
+                elements.forEach(element =&gt; {{
+                    const width = element.offsetWidth;
+                    const height = element.offsetHeight;
+                    if (width &gt; 0) maxWidth = Math.max(maxWidth, width);
+                    if (height &gt; 0) maxHeight = Math.max(maxHeight, height);
+                }});
+                
+                return {{
+                    width: Math.min(maxWidth, </span><span class="token interpolation"><span class="token punctuation">{</span>width<span class="token punctuation">}</span></span><span class="token string">),  // Limit max width to viewport width
+                    height: Math.max(maxHeight, 100)  // Ensure minimum height
+                }}
+            }}&quot;&quot;&quot;</span></span><span class="token punctuation">)</span>
+
+            <span class="token comment"># Update viewport to match content</span>
+            <span class="token keyword">await</span> page<span class="token punctuation">.</span>set_viewport_size<span class="token punctuation">(</span>
+                <span class="token punctuation">{</span><span class="token string">&quot;width&quot;</span><span class="token punctuation">:</span> content_size<span class="token punctuation">[</span><span class="token string">&quot;width&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">&quot;height&quot;</span><span class="token punctuation">:</span> content_size<span class="token punctuation">[</span><span class="token string">&quot;height&quot;</span><span class="token punctuation">]</span><span class="token punctuation">}</span>
+            <span class="token punctuation">)</span>
+
+            <span class="token keyword">return</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span>screenshot<span class="token punctuation">(</span>
+                <span class="token builtin">type</span><span class="token operator">=</span><span class="token string">&quot;jpeg&quot;</span><span class="token punctuation">,</span>
+                quality<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">,</span>
+                full_page<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>  <span class="token comment"># Capture the full scrollable page</span>
+            <span class="token punctuation">)</span>
+        <span class="token keyword">finally</span><span class="token punctuation">:</span>
+            <span class="token keyword">await</span> browser<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><p>这段代码的关键特性包括：</p> <ol><li><strong>高DPI渲染</strong>：使用<code>device_scale_factor=3</code>确保生成的图片清晰度高</li> <li><strong>智能边界检测</strong>：自动计算内容的实际尺寸，避免不必要的空白区域</li> <li><strong>等待完全加载</strong>：使用<code>networkidle</code>确保所有动态内容都已加载完成</li> <li><strong>高质量输出</strong>：使用最高质量设置生成JPEG图片</li></ol> <h2 id="结语"><a href="#结语" class="header-anchor">#</a> 结语</h2> <p>在信息爆炸的时代，如何让自己的内容脱颖而出是每个创作者面临的挑战。这个AI驱动的卡片生成器为普通用户提供了一种简单而有效的方式，让他们能够创建专业级别的视觉内容，提高内容的传播价值。</p> <p>无论你是内容创作者、营销人员、教育工作者还是普通用户，这个工具都能帮助你更好地展示和分享信息。</p> <p>欢迎尝试这个工具，让我们一起探索AI赋能内容创作的无限可能！</p></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/blog/program/llm-card-generator.html#项目背景" class="sidebar-link reco-side-项目背景" data-v-b57cc07c>项目背景</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/program/llm-card-generator.html#技术原理" class="sidebar-link reco-side-技术原理" data-v-b57cc07c>技术原理</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/program/llm-card-generator.html#支持的卡片类型" class="sidebar-link reco-side-支持的卡片类型" data-v-b57cc07c>支持的卡片类型</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/program/llm-card-generator.html#使用示例" class="sidebar-link reco-side-使用示例" data-v-b57cc07c>使用示例</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/program/llm-card-generator.html#示例效果" class="sidebar-link reco-side-示例效果" data-v-b57cc07c>示例效果</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/program/llm-card-generator.html#技术细节" class="sidebar-link reco-side-技术细节" data-v-b57cc07c>技术细节</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/program/llm-card-generator.html#技术实现" class="sidebar-link reco-side-技术实现" data-v-b57cc07c>技术实现</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/program/llm-card-generator.html#结语" class="sidebar-link reco-side-结语" data-v-b57cc07c>结语</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/blog/assets/js/app.4d4e636d.js" defer></script><script src="/blog/assets/js/3.a5d06c5b.js" defer></script><script src="/blog/assets/js/1.b21f7e85.js" defer></script><script src="/blog/assets/js/46.4491da7a.js" defer></script>
+  </body>
+</html>
