@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梅灿鸿 - 个人简历</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+
+        .container {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm 18mm;
+            margin: 0 auto;
+            background: white;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #000;
+            border-bottom: 3px solid #000;
+            padding-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            color: #000;
+            border-left: 4px solid #000;
+            padding-left: 10px;
+        }
+
+        h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-top: 14px;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        .info-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px 15px;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .info-label {
+            font-weight: 600;
+            min-width: 60px;
+        }
+
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .company-name {
+            font-weight: 700;
+            color: #000;
+        }
+
+        .company-period {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .project-header {
+            margin-top: 14px;
+            margin-bottom: 4px;
+        }
+
+        .project-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .project-role {
+            font-size: 13px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        ul {
+            margin-left: 18px;
+            margin-top: 8px;
+        }
+
+        li {
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .tech-stack {
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .tech-item {
+            margin-bottom: 4px;
+        }
+
+        .tech-label {
+            font-weight: 600;
+            color: #000;
+        }
+
+        .education-info {
+            font-size: 14px;
+            color: #333;
+        }
+
+        @media print {
+            body {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .container {
+                margin: 0;
+                padding: 15mm 18mm;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>梅灿鸿</h1>
+
+        <h2>个人信息</h2>
+        <div class="info-list">
+            <div class="info-item"><span class="info-label">性别：</span>男</div>
+            <div class="info-item"><span class="info-label">年龄：</span>25</div>
+            <div class="info-item"><span class="info-label">学历：</span>本科</div>
+            <div class="info-item"><span class="info-label">专业：</span>网络工程</div>
+            <div class="info-item"><span class="info-label">电话：</span>13059277414</div>
+            <div class="info-item"><span class="info-label">邮箱：</span>canhong5357003@gmail.com</div>
+            <div class="info-item"><span class="info-label">GitHub：</span><a href="https://github.com/meicanhong"
+                    style="color: #0066cc; text-decoration: none;">github.com/meicanhong</a></div>
+            <div class="info-item"><span class="info-label">博客：</span><a href="https://meicanhong.github.io/blog/"
+                    style="color: #0066cc; text-decoration: none;">meicanhong.github.io/blog</a></div>
+        </div>
+
+        <h2>项目经历</h2>
+
+        <div class="project-header">
+            <div class="project-title">MaybeAI（Agentic Workflow 平台）</div>
+            <div class="project-role">Agent工程师　2024.08 – 2025.09</div>
+        </div>
+        <ul>
+            <li>设计并实现自然语言生成生产级 Workflow 核心能力<strong>从 0 到 1</strong>：用户一句自然语言描述，系统自动完成意图解析 → 多 Agent 规划 → Tool 链编排 → 可视化
+                Workflow 固化，平均 <strong>9 秒生成、21 秒首次运行</strong>，Workflow 成功生成率超 <strong>96%</strong> </li>
+            <li>设计并实现<strong>图形化 Workflow 编辑器</strong>：支持节点拖拽编辑（LLM 模型、Prompt、工具参数、分支逻辑等）、实时预览与版本对比，显著提升企业用户定制与迭代效率。
+            </li>
+            <li>实现<strong>"冷启动 + 固化执行"双模引擎</strong>：首次由 LLM 完成规划，生成后自动切换为硬编码稳定执行（完全脱 LLM），仅在异常场景介入，单 Workflow 日均 token
+                消耗降低 <strong>90%+</strong>，大幅降低平台大模型成本。</li>
+            <li>构建<strong>长任务 Agent 上下文工程体系</strong>（文件系统外部记忆 + 可逆压缩 + 追加式行动-观察历史 + 复述目标），支持 <strong>50+
+                    步复杂任务无目标漂移</strong>，提升跨月趋势分析与深度报告自动化稳定性。</li>
+            <li>落地<strong>全链路可观测与一键回放系统</strong>（Redis + Elasticsearch checkpoint）：支持每步 reasoning chain、tool call 与
+                token 消耗可视化回放，异常 <strong>30 秒告警</strong>，故障定位时间降至 <strong>3 分钟内</strong>。</li>
+            <li>研发<strong>企业级 MCP Tool 平台</strong>：支持 OpenAPI 3.0 接口 <strong>8 秒自动转化</strong>及 MCP 标准 Tool
+                一键收录，实现可检索/灰度/观测/审计全能力；结合 HyDE + Multi-Query + Parent Document + ColBERT 四路向量检索优化，已聚合 <strong>1000+ 企业级
+                    Tool</strong>，日调用峰值 <strong>10 万次</strong>，成功率 <strong>99.2%</strong>。</li>
+            <li>设计并实现基于用户浏览器侧的 <strong>Browser Plugin（MCP Tool）</strong>，支持 Agent 在 Workflow 中以自然语言调度用户浏览能力获取实时数据，并将
+                Tool Output 注入后续流程，解决登录态与权限受限场景下的数据接入问题。</li>
+        </ul>
+
+        <div class="project-header">
+            <div class="project-title">Ads3（Web3 智能广告平台）</div>
+            <div class="project-role">后端工程师　2023.10 – 2024.08</div>
+        </div>
+        <ul>
+            <li>负责开发 Ads3 <strong>核心活动引擎</strong>，支持概率抽奖、人满开团、定时开奖、裂变任务等 <strong>8+ 活动玩法</strong>，日均 PV
+                <strong>10w+</strong>，单日最高 <strong>2000+ 同时在线活动</strong>，支持 <strong>1w+ 用户并发</strong>无明显延迟</li>
+            <li>设计并开发<strong>平台钱包系统从 0 到 1</strong>，支持 TON、Solana、BNB Chain、Polygon
+                <strong>多链</strong>，覆盖链上充值、提现及资金流全链路追踪，防刷钱包风控规则生效，资金准确率 <strong>100%</strong>，日充值提现金额峰值超 <strong>20
+                    万美金</strong></li>
+            <li>主导 <strong>Telegram 生态任务系统</strong>开发，对接 Telegram Mini App 官方 API 与 TON 链上任务，实现用户登录、每日签到、邀请裂变、链上行为验证等
+                <strong>20+ 任务类型</strong>，3 个月内帮助平台冷启动用户突破 <strong>100w+</strong></li>
+            <li>设计并开发运营后台（React + NestJS），实现活动一键创建/编辑/上下架、资金归集与分发、实时数据大屏等功能，将运营发活动时间<strong>从 2 小时缩短至 5
+                    分钟</strong>，运营效率提升超 <strong>90%</strong></li>
+            <li>搭建完整<strong>反作弊与风控体系</strong>（IP/设备指纹/行为分析 + 链上地址黑名单），作弊用户识别率 <strong>>98%</strong>，为平台节约刷量成本超
+                <strong>100 万美金</strong></li>
+        </ul>
+
+        <div class="project-header" style="padding-top: 60px;">
+            <div class="project-title">Footprint Analytics（链上数据分析平台）</div>
+            <div class="project-role">区块链数据基础设施工程师　2022.09 – 2023.10</div>
+        </div>
+        <ul>
+            <li>负责<strong>多链统一分析引擎与查询服务</strong>的开发与稳定性建设，面向 <strong>40+ EVM 与非 EVM 链</strong>，支撑日均 <strong>10 万+
+                    次复杂分析查询</strong>，作为平台核心数据底座</li>
+            <li>负责 Trino + Doris + Iceberg + Flink <strong>技术栈选型与深度调优</strong>，针对多链异构 Schema、高基数 Join 场景，将跨链复杂查询 P95
+                延迟<strong>从 300s+ 优化至 10s 内</strong>，实现准实时交互式分析体验</li>
+            <li>设计并实现<strong>多链实时数据收录与增量更新 Pipeline</strong>，日处理原始链上数据 <strong>300GB+</strong>，覆盖 <strong>40+
+                    主流公链</strong>（Ethereum、BSC、Solana、Sui 等），保障 <strong>99.99%+ 数据完整性</strong>与时效性</li>
+            <li>自主研发<strong>多链地址标签与巨鲸行为分析体系</strong>，支持高频地址评分与行为聚合，日处理关键地址 <strong>300 万+</strong>，相关数据能力被多家头部机构直接采购使用
+            </li>
+        </ul>
+
+        <h2>公司经历</h2>
+        <div class="company-header">
+            <span class="company-name">广州悦谦科技有限公司</span>
+            <span class="company-period">2022.07 – 2025.09 软件工程师</span>
+        </div>
+
+        <h2>教育背景</h2>
+        <div class="education-info">东莞理工学院　网络工程　本科　2018.09 – 2022.06</div>
+
+        <h2>专业技能</h2>
+        <div class="tech-stack">
+            <div class="tech-item"><span class="tech-label">编程语言：</span>Python、Typescript、Java</div>
+            <div class="tech-item"><span class="tech-label">大模型 & Agent：</span>Multi-Agent、Tool
+                Calling、ReAct、RAG、Context Engineering、Prompt Engineering</div>
+            <div class="tech-item"><span class="tech-label">大数据 &
+                    基础设施：</span>Trino、Doris、Iceberg、Flink、Redis、Elasticsearch、MongoDB、MySQL、PostgreSQL</div>
+            <div class="tech-item"><span class="tech-label">区块链：</span>EVM/非EVM 全链数据管道、智能合约交互、钱包系统</div>
+            <div class="tech-item"><span class="tech-label">运维：</span>Linux、Docker、Kubernetes、Tencent Cloud/GCP</div>
+        </div>
+
+        <h2>个人评价</h2>
+        <ul>
+            <li>拥有 3 年以上大语言模型（LLM）实战经验，熟悉 Vibe Coding，日常习惯使用 AI 自动化重复性任务与辅助脑力工作。</li>
+            <li>热衷技术创新，对新兴工具和前沿技术保持强烈好奇心和学习热情。</li>
+            <li>自驱力强，注重代码质量与产品体验，在 AI 时代追求高标准和良好品味。</li>
+        </ul>
+    </div>
+</body>
+
+</html>
