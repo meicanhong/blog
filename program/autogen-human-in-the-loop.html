@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>AutoGen Human-in-the-Loop 实践：从暂停机制到前后端通讯 | Danny Blog</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="description" content="看见 思考 行动">
+    
+    <link rel="preload" href="/assets/css/0.styles.e853742c.css" as="style"><link rel="preload" href="/assets/js/app.1b3b61c0.js" as="script"><link rel="preload" href="/assets/js/3.2a1770ca.js" as="script"><link rel="preload" href="/assets/js/1.b21f7e85.js" as="script"><link rel="preload" href="/assets/js/48.79858285.js" as="script"><link rel="prefetch" href="/assets/js/10.0d87b634.js"><link rel="prefetch" href="/assets/js/11.5c30353c.js"><link rel="prefetch" href="/assets/js/12.ffde56ac.js"><link rel="prefetch" href="/assets/js/13.e9f579d7.js"><link rel="prefetch" href="/assets/js/14.8dc2ada3.js"><link rel="prefetch" href="/assets/js/15.fc93cd43.js"><link rel="prefetch" href="/assets/js/16.a83dc6dd.js"><link rel="prefetch" href="/assets/js/17.9063e608.js"><link rel="prefetch" href="/assets/js/18.27eefc2f.js"><link rel="prefetch" href="/assets/js/19.6d5d19b1.js"><link rel="prefetch" href="/assets/js/20.3f553e9e.js"><link rel="prefetch" href="/assets/js/21.b6c6b513.js"><link rel="prefetch" href="/assets/js/22.3e328f0a.js"><link rel="prefetch" href="/assets/js/23.21517eb3.js"><link rel="prefetch" href="/assets/js/24.83d27cea.js"><link rel="prefetch" href="/assets/js/25.7b324267.js"><link rel="prefetch" href="/assets/js/26.1b4b6af4.js"><link rel="prefetch" href="/assets/js/27.3fe3e4b0.js"><link rel="prefetch" href="/assets/js/28.0b7d432f.js"><link rel="prefetch" href="/assets/js/29.d4b59edd.js"><link rel="prefetch" href="/assets/js/30.cdc9fa4f.js"><link rel="prefetch" href="/assets/js/31.385fbf8b.js"><link rel="prefetch" href="/assets/js/32.97369398.js"><link rel="prefetch" href="/assets/js/33.b460d5d2.js"><link rel="prefetch" href="/assets/js/34.2d6f88d0.js"><link rel="prefetch" href="/assets/js/35.98759a55.js"><link rel="prefetch" href="/assets/js/36.db5e7145.js"><link rel="prefetch" href="/assets/js/37.62a38dfb.js"><link rel="prefetch" href="/assets/js/38.5e4df999.js"><link rel="prefetch" href="/assets/js/39.4d610e3b.js"><link rel="prefetch" href="/assets/js/4.aa9d9f9f.js"><link rel="prefetch" href="/assets/js/40.11218ea1.js"><link rel="prefetch" href="/assets/js/41.4c267658.js"><link rel="prefetch" href="/assets/js/42.dff30f41.js"><link rel="prefetch" href="/assets/js/43.8f2b46be.js"><link rel="prefetch" href="/assets/js/44.c765080a.js"><link rel="prefetch" href="/assets/js/45.d0aca86c.js"><link rel="prefetch" href="/assets/js/46.3fcd3795.js"><link rel="prefetch" href="/assets/js/47.5c12416d.js"><link rel="prefetch" href="/assets/js/49.1d5927f8.js"><link rel="prefetch" href="/assets/js/5.b8f1876b.js"><link rel="prefetch" href="/assets/js/50.0943b738.js"><link rel="prefetch" href="/assets/js/51.715b8f2e.js"><link rel="prefetch" href="/assets/js/6.3a042769.js"><link rel="prefetch" href="/assets/js/7.58400f25.js"><link rel="prefetch" href="/assets/js/8.03f273dd.js"><link rel="prefetch" href="/assets/js/9.4354e46a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e853742c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>Danny Blog</h3> <p class="description" data-v-59e6cb88>看见 思考 行动</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>Danny</span>
+          
+        <!---->
+        2025
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Danny Blog</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/Big-Data/" class="nav-link"><i class="undefined"></i>
+  Big-Data
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Life/" class="nav-link"><i class="undefined"></i>
+  Life
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Philosophy/" class="nav-link"><i class="undefined"></i>
+  Philosophy
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Program/" class="nav-link"><i class="undefined"></i>
+  Program
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/categories/Philosophy/" class="nav-link"><i class="iconfont reco-date"></i>
+  Philosophy
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><a href="/mythink/about_me.html" class="nav-link"><i class="undefined"></i>
+  About Me
+</a></div><div class="nav-item"><a href="https://github.com/meicanhong" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/avatar.jpg" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    Danny
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>37</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>18</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/Big-Data/" class="nav-link"><i class="undefined"></i>
+  Big-Data
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Life/" class="nav-link"><i class="undefined"></i>
+  Life
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Philosophy/" class="nav-link"><i class="undefined"></i>
+  Philosophy
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Program/" class="nav-link"><i class="undefined"></i>
+  Program
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/categories/Philosophy/" class="nav-link"><i class="iconfont reco-date"></i>
+  Philosophy
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><a href="/mythink/about_me.html" class="nav-link"><i class="undefined"></i>
+  About Me
+</a></div><div class="nav-item"><a href="https://github.com/meicanhong" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>AutoGen Human-in-the-Loop 实践：从暂停机制到前后端通讯</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>Danny</span>
+          
+        <!---->
+        2025
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">AutoGen Human-in-the-Loop 实践：从暂停机制到前后端通讯</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>Danny</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2025/11/9</span></i> <!----> <!----></div></div> <div class="theme-reco-content content__default"><h1 id="autogen-human-in-the-loop-实践-从暂停机制到前后端通讯"><a href="#autogen-human-in-the-loop-实践-从暂停机制到前后端通讯" class="header-anchor">#</a> AutoGen Human-in-the-Loop 实践：从暂停机制到前后端通讯</h1> <p>最近在用 AutoGen 搭建一个贷款审批系统，需要 AI 评估完信用风险后，暂停等待银行职员审查文件并最终批准。这个场景完美契合 Human-in-the-Loop（人机循环）模式。在实现过程中，我深入研究了 AutoGen 的 UserProxyAgent 暂停机制和前后端通讯方案，踩了不少坑，也有些收获。</p> <h2 id="为什么需要-human-in-the-loop"><a href="#为什么需要-human-in-the-loop" class="header-anchor">#</a> 为什么需要 Human-in-the-Loop</h2> <p>在很多实际场景中，完全自动化的 AI 决策是不够的，甚至是危险的：</p> <ul><li><strong>金融审批</strong>：贷款、信用卡申请需要人类最终把关</li> <li><strong>医疗诊断</strong>：AI 辅助诊断，但医生做最终决策</li> <li><strong>内容审核</strong>：敏感内容需要人工复核</li> <li><strong>法律文书</strong>：AI 起草合同，律师审查修改</li></ul> <p>这些场景的共同点是：AI 负责高效处理和初步判断，人类保留最终决策权，确保合规与责任。</p> <h2 id="贷款审批场景实现"><a href="#贷款审批场景实现" class="header-anchor">#</a> 贷款审批场景实现</h2> <p>我们的目标是：AI 评估信用风险 → 银行职员审查文件 → 最终批准/拒绝贷款。</p> <h3 id="完整代码"><a href="#完整代码" class="header-anchor">#</a> 完整代码</h3> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">import</span> asyncio
+<span class="token keyword">from</span> autogen_agentchat<span class="token punctuation">.</span>agents <span class="token keyword">import</span> AssistantAgent<span class="token punctuation">,</span> UserProxyAgent
+<span class="token keyword">from</span> autogen_agentchat<span class="token punctuation">.</span>conditions <span class="token keyword">import</span> TextMentionTermination
+<span class="token keyword">from</span> autogen_agentchat<span class="token punctuation">.</span>teams <span class="token keyword">import</span> RoundRobinGroupChat
+<span class="token keyword">from</span> autogen_agentchat<span class="token punctuation">.</span>ui <span class="token keyword">import</span> Console
+<span class="token keyword">from</span> autogen_ext<span class="token punctuation">.</span>models<span class="token punctuation">.</span>openai <span class="token keyword">import</span> OpenAIChatCompletionClient
+
+<span class="token comment"># 配置 LLM 客户端（需要设置 OPENAI_API_KEY 环境变量）</span>
+model_client <span class="token operator">=</span> OpenAIChatCompletionClient<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">&quot;gpt-4o-mini&quot;</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 1. 信用风险评估代理</span>
+risk_assessor <span class="token operator">=</span> AssistantAgent<span class="token punctuation">(</span>
+    name<span class="token operator">=</span><span class="token string">&quot;Risk_Assessor&quot;</span><span class="token punctuation">,</span>
+    model_client<span class="token operator">=</span>model_client<span class="token punctuation">,</span>
+    system_message<span class="token operator">=</span><span class="token triple-quoted-string string">&quot;&quot;&quot;
+    你是一位专业的信用风险评估专家。
+    根据申请人提供的个人信息（信用分数、年收入、债务收入比、就业历史、贷款金额等），
+    分析信用风险，给出风险分数（0-100，越低越好）和初步推荐（批准/拒绝/需进一步审查）。
+    评估完成后，请总结报告，并询问银行职员是否批准贷款。
+    &quot;&quot;&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># 2. 银行职员代理（Human-in-the-Loop）</span>
+bank_officer <span class="token operator">=</span> UserProxyAgent<span class="token punctuation">(</span>
+    name<span class="token operator">=</span><span class="token string">&quot;Bank_Officer&quot;</span><span class="token punctuation">,</span>
+    input_func<span class="token operator">=</span><span class="token builtin">input</span><span class="token punctuation">,</span>  <span class="token comment"># 使用控制台 input() 获取人类输入</span>
+    system_message<span class="token operator">=</span><span class="token triple-quoted-string string">&quot;&quot;&quot;
+    你是一位银行贷款审批职员。
+    请仔细审查风险评估报告和申请文件。
+    你可以提问、要求更多信息，或直接决定：
+    - 输入 &quot;APPROVE&quot; 表示批准贷款
+    - 输入 &quot;REJECT&quot; 表示拒绝贷款并说明原因
+    - 输入其他内容表示反馈或提问，系统会继续交互
+    &quot;&quot;&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># 3. 终止条件：当出现 &quot;APPROVE&quot; 或 &quot;REJECT&quot; 时结束对话</span>
+termination <span class="token operator">=</span> TextMentionTermination<span class="token punctuation">(</span><span class="token string">&quot;APPROVE&quot;</span><span class="token punctuation">)</span> <span class="token operator">|</span> TextMentionTermination<span class="token punctuation">(</span><span class="token string">&quot;REJECT&quot;</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 4. 创建团队：轮流发言（先风险评估代理，然后银行职员）</span>
+team <span class="token operator">=</span> RoundRobinGroupChat<span class="token punctuation">(</span>
+    participants<span class="token operator">=</span><span class="token punctuation">[</span>risk_assessor<span class="token punctuation">,</span> bank_officer<span class="token punctuation">]</span><span class="token punctuation">,</span>
+    termination_condition<span class="token operator">=</span>termination
+<span class="token punctuation">)</span>
+
+<span class="token comment"># 5. 主函数：启动贷款审批任务</span>
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">loan_approval_process</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 示例申请人信息</span>
+    applicant_info <span class="token operator">=</span> <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    申请人：张三
+    信用分数：720
+    年收入：150,000 元
+    月债务：2,500 元（债务收入比 DTI：20%）
+    就业历史：稳定工作 8 年
+    贷款金额：500,000 元（房屋贷款）
+    其他：无不良记录
+    &quot;&quot;&quot;</span>
+
+    task <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f&quot;&quot;&quot;
+    请评估以下贷款申请的信用风险：
+    </span><span class="token interpolation"><span class="token punctuation">{</span>applicant_info<span class="token punctuation">}</span></span><span class="token string">
+
+    给出详细风险分析、风险分数和初步推荐。
+    然后将报告提交给银行职员最终审批。
+    &quot;&quot;&quot;</span></span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;=== 开始贷款审批流程 ===\n&quot;</span><span class="token punctuation">)</span>
+    result <span class="token operator">=</span> <span class="token keyword">await</span> Console<span class="token punctuation">(</span>team<span class="token punctuation">.</span>run_stream<span class="token punctuation">(</span>task<span class="token operator">=</span>task<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;\n=== 审批结果 ===&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>final_response<span class="token punctuation">)</span>
+
+<span class="token comment"># 运行</span>
+asyncio<span class="token punctuation">.</span>run<span class="token punctuation">(</span>loan_approval_process<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre></div><h3 id="执行效果"><a href="#执行效果" class="header-anchor">#</a> 执行效果</h3> <div class="language- extra-class"><pre class="language-text"><code>=== 开始贷款审批流程 ===
+
+---------- Risk_Assessor ----------
+风险分析报告：
+- 信用分数 720：良好
+- DTI 20%：低风险
+- 稳定就业 8 年：正面因素
+风险分数：25（低风险）
+初步推荐：批准
+
+请银行职员审查并最终决定是否批准贷款。
+
+---------- Bank_Officer ----------
+[等待人类输入...] 请审查以上报告。你可以提问或输入 APPROVE / REJECT：
+
+&gt; 文件已审查，一切正常。APPROVE
+
+---------- Risk_Assessor ----------
+贷款已获批准！最终决定：批准贷款 500,000 元给张三。
+
+TERMINATE
+</code></pre></div><h2 id="userproxyagent-的暂停机制"><a href="#userproxyagent-的暂停机制" class="header-anchor">#</a> UserProxyAgent 的暂停机制</h2> <p>一开始我很好奇：AutoGen 是怎么做到&quot;跑到 UserProxyAgent 就自动暂停等待人类输入&quot;的？</p> <h3 id="核心原理"><a href="#核心原理" class="header-anchor">#</a> 核心原理</h3> <p>UserProxyAgent 的暂停机制依赖于 <strong>异步输入函数（input_func）</strong> 和 <strong>事件驱动的消息处理流程</strong>。</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">class</span> <span class="token class-name">UserProxyAgent</span><span class="token punctuation">(</span>BaseChatAgent<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>
+        self<span class="token punctuation">,</span>
+        name<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">,</span>
+        input_func<span class="token punctuation">:</span> Callable<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">,</span> CancellationToken <span class="token operator">|</span> <span class="token boolean">None</span><span class="token punctuation">]</span><span class="token punctuation">,</span> Awaitable<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">|</span> <span class="token boolean">None</span> <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">,</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>_input_func <span class="token operator">=</span> input_func <span class="token keyword">or</span> default_input_func
+</code></pre></div><p>关键点：</p> <ul><li><code>input_func</code> 是一个异步函数，签名是 <code>async def func(prompt: str, cancellation_token) -&gt; str</code></li> <li>它接收一个提示字符串（包含完整对话历史），返回人类输入的字符串</li> <li>默认实现是 <code>input_func = input</code>（控制台输入）</li></ul> <h3 id="暂停的实现"><a href="#暂停的实现" class="header-anchor">#</a> 暂停的实现</h3> <p>在 UserProxyAgent 的 <code>a_generate_response</code> 方法中：</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">a_generate_response</span><span class="token punctuation">(</span>
+    self<span class="token punctuation">,</span> messages<span class="token punctuation">:</span> Sequence<span class="token punctuation">[</span>Message<span class="token punctuation">]</span><span class="token punctuation">,</span> cancellation_token<span class="token punctuation">:</span> CancellationToken <span class="token operator">|</span> <span class="token boolean">None</span>
+<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> Message <span class="token operator">|</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+    <span class="token comment"># 1. 构建提示，给人类显示当前上下文</span>
+    prompt <span class="token operator">=</span> self<span class="token punctuation">.</span>_format_prompt<span class="token punctuation">(</span>messages<span class="token punctuation">)</span>  <span class="token comment"># 将历史消息格式化为可读提示</span>
+
+    <span class="token comment"># 2. 调用 input_func，await 直到得到输入</span>
+    user_input <span class="token operator">=</span> <span class="token keyword">await</span> self<span class="token punctuation">.</span>_input_func<span class="token punctuation">(</span>prompt<span class="token punctuation">,</span> cancellation_token<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> user_input <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>  <span class="token comment"># 用户取消</span>
+        <span class="token keyword">return</span> <span class="token boolean">None</span>
+
+    <span class="token comment"># 3. 将人类输入包装成 TextMessage 返回</span>
+    <span class="token keyword">return</span> TextMessage<span class="token punctuation">(</span>content<span class="token operator">=</span>user_input<span class="token punctuation">,</span> source<span class="token operator">=</span>self<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+</code></pre></div><p><strong>关键的一行</strong>：<code>await self._input_func(...)</code> 会挂起（suspend）当前协程，直到 <code>input_func</code> 完成返回字符串。此时，整个团队的执行流（<code>team.run_stream()</code>）也被暂停，因为它在等待这个代理的回复。</p> <h3 id="团队执行流程"><a href="#团队执行流程" class="header-anchor">#</a> 团队执行流程</h3> <p>在 <code>RoundRobinGroupChat</code> 中：</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">async</span> <span class="token keyword">for</span> turn_result <span class="token keyword">in</span> self<span class="token punctuation">.</span>_run_turn<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    current_agent <span class="token operator">=</span> self<span class="token punctuation">.</span>_next_participant<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 轮到 UserProxyAgent</span>
+    response <span class="token operator">=</span> <span class="token keyword">await</span> current_agent<span class="token punctuation">.</span>a_generate_response<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>  <span class="token comment"># 这里调用</span>
+    <span class="token keyword">yield</span> response
+    <span class="token comment"># 检查终止条件...</span>
+</code></pre></div><p>当轮到 UserProxyAgent 时：</p> <ol><li>调用 <code>a_generate_response</code></li> <li>进入 <code>await input_func</code></li> <li>整个异步迭代器暂停 → 外部的 <code>await Console(stream)</code> 也暂停显示</li> <li>直到人类输入后，协程恢复，继续下一个代理或终止</li></ol> <p>这就是 AutoGen 实现&quot;自然暂停&quot;的完整机制：<strong>纯异步协程挂起 + 可替换输入函数</strong>。</p> <h2 id="与前端通讯的方案"><a href="#与前端通讯的方案" class="header-anchor">#</a> 与前端通讯的方案</h2> <p>控制台 <code>input()</code> 只适合调试，生产环境需要 Web UI。AutoGen 的 <code>input_func</code> 是可替换的异步函数，这让前后端通讯变得非常灵活。</p> <h3 id="方案一-fastapi-websocket-企业级推荐"><a href="#方案一-fastapi-websocket-企业级推荐" class="header-anchor">#</a> 方案一：FastAPI + WebSocket（企业级推荐）</h3> <p>这是微软官方推荐的方案，适合需要完全自定义前端界面的场景。</p> <h4 id="后端实现"><a href="#后端实现" class="header-anchor">#</a> 后端实现</h4> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">from</span> fastapi <span class="token keyword">import</span> FastAPI<span class="token punctuation">,</span> WebSocket<span class="token punctuation">,</span> WebSocketDisconnect
+<span class="token keyword">from</span> autogen_agentchat<span class="token punctuation">.</span>agents <span class="token keyword">import</span> UserProxyAgent
+<span class="token keyword">import</span> asyncio
+<span class="token keyword">import</span> json
+
+app <span class="token operator">=</span> FastAPI<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 存储活跃的 WebSocket 连接</span>
+active_websockets <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>websocket</span><span class="token punctuation">(</span><span class="token string">&quot;/ws/loan_approval/{session_id}&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">websocket_endpoint</span><span class="token punctuation">(</span>websocket<span class="token punctuation">:</span> WebSocket<span class="token punctuation">,</span> session_id<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">await</span> websocket<span class="token punctuation">.</span>accept<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    active_websockets<span class="token punctuation">[</span>session_id<span class="token punctuation">]</span> <span class="token operator">=</span> websocket
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+            <span class="token comment"># 保持连接，接收心跳或消息</span>
+            <span class="token keyword">await</span> websocket<span class="token punctuation">.</span>receive_text<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">except</span> WebSocketDisconnect<span class="token punctuation">:</span>
+        <span class="token keyword">del</span> active_websockets<span class="token punctuation">[</span>session_id<span class="token punctuation">]</span>
+
+<span class="token comment"># 自定义 input_func：通过 WebSocket 与前端通讯</span>
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">websocket_input_func</span><span class="token punctuation">(</span>prompt<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">,</span> cancellation_token<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> session_id<span class="token operator">=</span><span class="token string">&quot;default&quot;</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> session_id <span class="token keyword">not</span> <span class="token keyword">in</span> active_websockets<span class="token punctuation">:</span>
+        <span class="token keyword">raise</span> Exception<span class="token punctuation">(</span><span class="token string">&quot;No active websocket for this session&quot;</span><span class="token punctuation">)</span>
+
+    ws <span class="token operator">=</span> active_websockets<span class="token punctuation">[</span>session_id<span class="token punctuation">]</span>
+
+    <span class="token comment"># 1. 发送对话上下文 + 等待输入的提示给前端</span>
+    <span class="token keyword">await</span> ws<span class="token punctuation">.</span>send_json<span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;waiting_for_input&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;prompt&quot;</span><span class="token punctuation">:</span> prompt<span class="token punctuation">,</span>  <span class="token comment"># 包含完整历史对话</span>
+        <span class="token string">&quot;message&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;请审查贷款申请并做出决定&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 2. 等待前端发送用户输入</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        data <span class="token operator">=</span> <span class="token keyword">await</span> ws<span class="token punctuation">.</span>receive_json<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">&quot;type&quot;</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;user_response&quot;</span><span class="token punctuation">:</span>
+            user_input <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token string">&quot;content&quot;</span><span class="token punctuation">]</span>
+            <span class="token keyword">return</span> user_input
+
+<span class="token comment"># 创建 UserProxyAgent 时传入自定义 input_func</span>
+bank_officer <span class="token operator">=</span> UserProxyAgent<span class="token punctuation">(</span>
+    name<span class="token operator">=</span><span class="token string">&quot;Bank_Officer&quot;</span><span class="token punctuation">,</span>
+    input_func<span class="token operator">=</span><span class="token keyword">lambda</span> prompt<span class="token punctuation">,</span> ct<span class="token punctuation">:</span> websocket_input_func<span class="token punctuation">(</span>prompt<span class="token punctuation">,</span> ct<span class="token punctuation">,</span> session_id<span class="token operator">=</span><span class="token string">&quot;user123&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+</code></pre></div><h4 id="前端实现"><a href="#前端实现" class="header-anchor">#</a> 前端实现</h4> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">const</span> ws <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WebSocket</span><span class="token punctuation">(</span><span class="token string">&quot;ws://localhost:8000/ws/loan_approval/user123&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ws<span class="token punctuation">.</span><span class="token function-variable function">onmessage</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>data<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">&quot;waiting_for_input&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 显示 AI 报告</span>
+        document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">&quot;chat&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>innerHTML <span class="token operator">+=</span>
+            <span class="token string">&quot;&lt;p&gt;&lt;strong&gt;AI报告：&lt;/strong&gt;&quot;</span> <span class="token operator">+</span> data<span class="token punctuation">.</span>prompt <span class="token operator">+</span> <span class="token string">&quot;&lt;/p&gt;&quot;</span><span class="token punctuation">;</span>
+        <span class="token comment">// 显示输入框</span>
+        document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">&quot;input-area&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>style<span class="token punctuation">.</span>display <span class="token operator">=</span> <span class="token string">&quot;block&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">sendApproval</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> input <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">&quot;user-input&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+    ws<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">&quot;user_response&quot;</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">content</span><span class="token operator">:</span> input  <span class="token comment">// 如 &quot;APPROVE&quot; 或 &quot;REJECT: 收入证明不足&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">&quot;input-area&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>style<span class="token punctuation">.</span>display <span class="token operator">=</span> <span class="token string">&quot;none&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>chat<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>input-area<span class="token punctuation">&quot;</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token value css language-css"><span class="token property">display</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span></span><span class="token punctuation">&quot;</span></span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>user-input<span class="token punctuation">&quot;</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>输入 APPROVE / REJECT 或反馈<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token value javascript language-javascript"><span class="token function">sendApproval</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token punctuation">&quot;</span></span></span><span class="token punctuation">&gt;</span></span>提交<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h2 id="在-userproxyagent-中能拿到什么数据"><a href="#在-userproxyagent-中能拿到什么数据" class="header-anchor">#</a> 在 UserProxyAgent 中能拿到什么数据</h2> <p>在实现前端通讯时，我遇到一个问题：能不能拿到之前所有 agent 的运行上下文？发给用户的那段提示词（prompt）是怎么生成的？</p> <h3 id="完整的对话历史"><a href="#完整的对话历史" class="header-anchor">#</a> 完整的对话历史</h3> <p>答案是：<strong>可以</strong>。UserProxyAgent 在需要人类输入时，能完整拿到整个对话历史上下文。</p> <p>在 <code>a_generate_response</code> 方法中：</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">a_generate_response</span><span class="token punctuation">(</span>
+    self<span class="token punctuation">,</span> messages<span class="token punctuation">:</span> Sequence<span class="token punctuation">[</span>Message<span class="token punctuation">]</span><span class="token punctuation">,</span> cancellation_token<span class="token punctuation">:</span> CancellationToken <span class="token operator">|</span> <span class="token boolean">None</span>
+<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> Message <span class="token operator">|</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+</code></pre></div><p><code>messages</code> 参数就是完整的对话历史上下文：</p> <ul><li>类型：<code>list[Message]</code> 或 <code>Sequence[Message]</code></li> <li>每个 <code>Message</code> 包含：
+<ul><li><code>content</code>: 消息内容</li> <li><code>source</code>: 发言者名称（如 &quot;Risk_Assessor&quot;）</li> <li><code>timestamp</code>: 时间戳</li> <li>其他元数据</li></ul></li></ul> <p>这个列表从任务开始到当前轮次的所有消息，顺序完整，包含所有之前 agent 的输出。</p> <h3 id="提示词的生成"><a href="#提示词的生成" class="header-anchor">#</a> 提示词的生成</h3> <p>在 UserProxyAgent 内部，有一个 <code>_format_prompt</code> 方法负责把历史消息格式化成人类可读的提示：</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">def</span> <span class="token function">_format_prompt</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> messages<span class="token punctuation">:</span> Sequence<span class="token punctuation">[</span>Message<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">str</span><span class="token punctuation">:</span>
+    <span class="token comment"># 遍历 messages 列表</span>
+    <span class="token comment"># 对于每条消息：</span>
+    <span class="token comment">#   如果是 TextMessage：显示 ---------- {source} ----------\n{content}\n</span>
+    <span class="token comment">#   如果是工具调用/结果：格式化显示工具名、参数、返回等</span>
+    <span class="token comment"># 最后追加一个输入提示，如 \n&gt;</span>
+</code></pre></div><p>示例输出：</p> <div class="language- extra-class"><pre class="language-text"><code>---------- Risk_Assessor ----------
+风险分析报告：
+信用分数：720（良好）
+...
+初步推荐：批准
+
+请银行职员最终审批。
+
+---------- Bank_Officer ----------
+[等待输入] &gt;
+</code></pre></div><p>这个完整的字符串就是 <code>prompt</code>，然后被传给你的 <code>input_func(prompt, cancellation_token)</code>。</p> <h3 id="自定义-userproxyagent-获取原始消息"><a href="#自定义-userproxyagent-获取原始消息" class="header-anchor">#</a> 自定义 UserProxyAgent 获取原始消息</h3> <p>如果你想拿到原始结构化的 <code>messages</code> 列表（而不是格式化后的字符串），可以自定义 UserProxyAgent 子类：</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">from</span> autogen_agentchat<span class="token punctuation">.</span>agents <span class="token keyword">import</span> UserProxyAgent
+<span class="token keyword">from</span> autogen_agentchat<span class="token punctuation">.</span>base <span class="token keyword">import</span> Message<span class="token punctuation">,</span> CancellationToken<span class="token punctuation">,</span> TextMessage
+
+<span class="token keyword">class</span> <span class="token class-name">CustomUserProxyAgent</span><span class="token punctuation">(</span>UserProxyAgent<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">a_generate_response</span><span class="token punctuation">(</span>
+        self<span class="token punctuation">,</span>
+        messages<span class="token punctuation">:</span> <span class="token builtin">list</span><span class="token punctuation">[</span>Message<span class="token punctuation">]</span><span class="token punctuation">,</span>
+        cancellation_token<span class="token punctuation">:</span> CancellationToken <span class="token operator">|</span> <span class="token boolean">None</span>
+    <span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> Message <span class="token operator">|</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+        <span class="token comment"># 这里你可以直接访问原始 messages！</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;=== 原始历史消息 ===&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> msg <span class="token keyword">in</span> messages<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f&quot;</span><span class="token interpolation"><span class="token punctuation">{</span>msg<span class="token punctuation">.</span>source<span class="token punctuation">}</span></span><span class="token string">: </span><span class="token interpolation"><span class="token punctuation">{</span>msg<span class="token punctuation">.</span>content<span class="token punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+
+        <span class="token comment"># 仍然使用父类的格式化 prompt（或自己重新格式化）</span>
+        prompt <span class="token operator">=</span> self<span class="token punctuation">.</span>_format_prompt<span class="token punctuation">(</span>messages<span class="token punctuation">)</span>
+
+        <span class="token comment"># 自定义逻辑：发给前端时可以附加更多数据</span>
+        enriched_prompt <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f&quot;=== 贷款审批上下文 ===\n</span><span class="token interpolation"><span class="token punctuation">{</span>prompt<span class="token punctuation">}</span></span><span class="token string">\n请做出决定：&quot;</span></span>
+
+        <span class="token comment"># 调用你的 input_func（可以是 WebSocket 等）</span>
+        user_input <span class="token operator">=</span> <span class="token keyword">await</span> self<span class="token punctuation">.</span>_input_func<span class="token punctuation">(</span>enriched_prompt<span class="token punctuation">,</span> cancellation_token<span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> TextMessage<span class="token punctuation">(</span>content<span class="token operator">=</span>user_input<span class="token punctuation">,</span> source<span class="token operator">=</span>self<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+</code></pre></div><p>这样你就能在需要人类输入时：</p> <ul><li>拿到原始结构化 <code>messages</code>（便于提取特定 agent 输出、工具结果等）</li> <li>拿到格式化的 <code>prompt</code> 字符串（适合直接展示给人类）</li></ul> <h3 id="在前端通讯时的实践"><a href="#在前端通讯时的实践" class="header-anchor">#</a> 在前端通讯时的实践</h3> <p>在 WebSocket 通讯中，你可以这样处理：</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">websocket_input_func</span><span class="token punctuation">(</span>prompt<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">,</span> cancellation_token<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> session_id<span class="token operator">=</span><span class="token string">&quot;default&quot;</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    ws <span class="token operator">=</span> active_websockets<span class="token punctuation">[</span>session_id<span class="token punctuation">]</span>
+
+    <span class="token comment"># 可以解析 prompt，或直接发送</span>
+    <span class="token keyword">await</span> ws<span class="token punctuation">.</span>send_json<span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;waiting_for_input&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;full_context&quot;</span><span class="token punctuation">:</span> prompt<span class="token punctuation">,</span>                  <span class="token comment"># 完整格式化历史（推荐直接显示）</span>
+        <span class="token string">&quot;last_ai_message&quot;</span><span class="token punctuation">:</span> extract_last_ai_message<span class="token punctuation">(</span>prompt<span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment"># 可选：提取最后一段AI报告</span>
+        <span class="token string">&quot;applicant_info&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span>                  <span class="token comment"># 可选：从上下文解析出的结构化数据</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 等待用户回复...</span>
+    data <span class="token operator">=</span> <span class="token keyword">await</span> ws<span class="token punctuation">.</span>receive_json<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> data<span class="token punctuation">[</span><span class="token string">&quot;content&quot;</span><span class="token punctuation">]</span>
+</code></pre></div><h2 id="踩坑记录"><a href="#踩坑记录" class="header-anchor">#</a> 踩坑记录</h2> <h3 id="坑一-websocket-连接管理"><a href="#坑一-websocket-连接管理" class="header-anchor">#</a> 坑一：WebSocket 连接管理</h3> <p>在多用户场景下，我用一个简单的 <code>dict</code> 存储 WebSocket 连接：</p> <div class="language-python extra-class"><pre class="language-python"><code>active_websockets <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+</code></pre></div><p>但这在生产环境不够健壮。更好的做法是：</p> <ul><li>使用 Redis 或数据库存储会话状态</li> <li>添加连接超时和心跳检测</li> <li>处理异常断开和重连</li></ul> <h3 id="坑二-终止条件不生效"><a href="#坑二-终止条件不生效" class="header-anchor">#</a> 坑二：终止条件不生效</h3> <p>我设置了 <code>TextMentionTermination(&quot;APPROVE&quot;)</code>，但输入 &quot;approve&quot;（小写）时不会终止。</p> <p>原因：默认是大小写敏感的。解决方案：</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token comment"># 方案一：统一转大写</span>
+termination <span class="token operator">=</span> TextMentionTermination<span class="token punctuation">(</span><span class="token string">&quot;APPROVE&quot;</span><span class="token punctuation">)</span>
+<span class="token comment"># 在 input_func 中：return user_input.upper()</span>
+
+<span class="token comment"># 方案二：使用正则表达式（如果支持）</span>
+<span class="token comment"># 或自定义终止条件</span>
+</code></pre></div><h2 id="核心洞察"><a href="#核心洞察" class="header-anchor">#</a> 核心洞察</h2> <p><strong>input_func 是可替换的异步函数</strong>。这个设计让 AutoGen 的 Human-in-the-Loop 极其灵活，从控制台调试到企业级 Web UI 的无缝切换。</p> <p><strong>await 机制实现自然暂停</strong>。不需要复杂的状态机或轮询，纯异步协程挂起就能实现优雅的暂停等待。</p> <p><strong>可以拿到完整的对话历史上下文</strong>。UserProxyAgent 不是&quot;盲目&quot;等待输入，而是能看到之前所有 agent 的输出，这让人类决策更有依据。</p> <p><strong>灵活的前后端通讯方案</strong>。WebSocket 适合企业级系统，Chainlit 适合快速原型，Gradio 适合简单演示，各有千秋。</p> <h2 id="总结"><a href="#总结" class="header-anchor">#</a> 总结</h2> <p>AutoGen 的 Human-in-the-Loop 实现非常优雅：通过 UserProxyAgent + 可替换的异步 input_func，实现了从控制台到 Web UI 的灵活切换。暂停机制基于纯异步协程挂起，不需要复杂的状态管理。</p> <p>在实际项目中，我推荐：</p> <ul><li><strong>快速原型阶段</strong>：用 Chainlit，几行代码就能跑起来</li> <li><strong>生产环境</strong>：用 FastAPI + WebSocket，完全自定义前端</li> <li><strong>内部工具</strong>：用 Gradio，简单够用</li></ul> <p>最重要的是理解 <code>input_func</code> 的本质：它就是一个&quot;等待人类输入的异步函数&quot;，你可以让它等待控制台输入、WebSocket 消息、HTTP 请求、甚至是邮件回复。这种设计的灵活性，让 Human-in-the-Loop 从理论变成了可落地的实践。</p></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#为什么需要-human-in-the-loop" class="sidebar-link reco-side-为什么需要-human-in-the-loop" data-v-b57cc07c>为什么需要 Human-in-the-Loop</a></li><li class="level-2" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#贷款审批场景实现" class="sidebar-link reco-side-贷款审批场景实现" data-v-b57cc07c>贷款审批场景实现</a></li><li class="level-3" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#完整代码" class="sidebar-link reco-side-完整代码" data-v-b57cc07c>完整代码</a></li><li class="level-3" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#执行效果" class="sidebar-link reco-side-执行效果" data-v-b57cc07c>执行效果</a></li><li class="level-2" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#userproxyagent-的暂停机制" class="sidebar-link reco-side-userproxyagent-的暂停机制" data-v-b57cc07c>UserProxyAgent 的暂停机制</a></li><li class="level-3" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#核心原理" class="sidebar-link reco-side-核心原理" data-v-b57cc07c>核心原理</a></li><li class="level-3" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#暂停的实现" class="sidebar-link reco-side-暂停的实现" data-v-b57cc07c>暂停的实现</a></li><li class="level-3" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#团队执行流程" class="sidebar-link reco-side-团队执行流程" data-v-b57cc07c>团队执行流程</a></li><li class="level-2" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#与前端通讯的方案" class="sidebar-link reco-side-与前端通讯的方案" data-v-b57cc07c>与前端通讯的方案</a></li><li class="level-3" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#方案一-fastapi-websocket-企业级推荐" class="sidebar-link reco-side-方案一-fastapi-websocket-企业级推荐" data-v-b57cc07c>方案一：FastAPI + WebSocket（企业级推荐）</a></li><li class="level-2" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#在-userproxyagent-中能拿到什么数据" class="sidebar-link reco-side-在-userproxyagent-中能拿到什么数据" data-v-b57cc07c>在 UserProxyAgent 中能拿到什么数据</a></li><li class="level-3" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#完整的对话历史" class="sidebar-link reco-side-完整的对话历史" data-v-b57cc07c>完整的对话历史</a></li><li class="level-3" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#提示词的生成" class="sidebar-link reco-side-提示词的生成" data-v-b57cc07c>提示词的生成</a></li><li class="level-3" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#自定义-userproxyagent-获取原始消息" class="sidebar-link reco-side-自定义-userproxyagent-获取原始消息" data-v-b57cc07c>自定义 UserProxyAgent 获取原始消息</a></li><li class="level-3" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#在前端通讯时的实践" class="sidebar-link reco-side-在前端通讯时的实践" data-v-b57cc07c>在前端通讯时的实践</a></li><li class="level-2" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#踩坑记录" class="sidebar-link reco-side-踩坑记录" data-v-b57cc07c>踩坑记录</a></li><li class="level-3" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#坑一-websocket-连接管理" class="sidebar-link reco-side-坑一-websocket-连接管理" data-v-b57cc07c>坑一：WebSocket 连接管理</a></li><li class="level-3" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#坑二-终止条件不生效" class="sidebar-link reco-side-坑二-终止条件不生效" data-v-b57cc07c>坑二：终止条件不生效</a></li><li class="level-2" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#核心洞察" class="sidebar-link reco-side-核心洞察" data-v-b57cc07c>核心洞察</a></li><li class="level-2" data-v-b57cc07c><a href="/program/autogen-human-in-the-loop.html#总结" class="sidebar-link reco-side-总结" data-v-b57cc07c>总结</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.1b3b61c0.js" defer></script><script src="/assets/js/3.2a1770ca.js" defer></script><script src="/assets/js/1.b21f7e85.js" defer></script><script src="/assets/js/48.79858285.js" defer></script>
+  </body>
+</html>

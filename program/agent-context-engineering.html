@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>AI Agent 上下文工程实践：从长任务崩溃到稳定运行 | Danny Blog</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="description" content="看见 思考 行动">
+    
+    <link rel="preload" href="/assets/css/0.styles.e853742c.css" as="style"><link rel="preload" href="/assets/js/app.1b3b61c0.js" as="script"><link rel="preload" href="/assets/js/3.2a1770ca.js" as="script"><link rel="preload" href="/assets/js/1.b21f7e85.js" as="script"><link rel="preload" href="/assets/js/47.5c12416d.js" as="script"><link rel="prefetch" href="/assets/js/10.0d87b634.js"><link rel="prefetch" href="/assets/js/11.5c30353c.js"><link rel="prefetch" href="/assets/js/12.ffde56ac.js"><link rel="prefetch" href="/assets/js/13.e9f579d7.js"><link rel="prefetch" href="/assets/js/14.8dc2ada3.js"><link rel="prefetch" href="/assets/js/15.fc93cd43.js"><link rel="prefetch" href="/assets/js/16.a83dc6dd.js"><link rel="prefetch" href="/assets/js/17.9063e608.js"><link rel="prefetch" href="/assets/js/18.27eefc2f.js"><link rel="prefetch" href="/assets/js/19.6d5d19b1.js"><link rel="prefetch" href="/assets/js/20.3f553e9e.js"><link rel="prefetch" href="/assets/js/21.b6c6b513.js"><link rel="prefetch" href="/assets/js/22.3e328f0a.js"><link rel="prefetch" href="/assets/js/23.21517eb3.js"><link rel="prefetch" href="/assets/js/24.83d27cea.js"><link rel="prefetch" href="/assets/js/25.7b324267.js"><link rel="prefetch" href="/assets/js/26.1b4b6af4.js"><link rel="prefetch" href="/assets/js/27.3fe3e4b0.js"><link rel="prefetch" href="/assets/js/28.0b7d432f.js"><link rel="prefetch" href="/assets/js/29.d4b59edd.js"><link rel="prefetch" href="/assets/js/30.cdc9fa4f.js"><link rel="prefetch" href="/assets/js/31.385fbf8b.js"><link rel="prefetch" href="/assets/js/32.97369398.js"><link rel="prefetch" href="/assets/js/33.b460d5d2.js"><link rel="prefetch" href="/assets/js/34.2d6f88d0.js"><link rel="prefetch" href="/assets/js/35.98759a55.js"><link rel="prefetch" href="/assets/js/36.db5e7145.js"><link rel="prefetch" href="/assets/js/37.62a38dfb.js"><link rel="prefetch" href="/assets/js/38.5e4df999.js"><link rel="prefetch" href="/assets/js/39.4d610e3b.js"><link rel="prefetch" href="/assets/js/4.aa9d9f9f.js"><link rel="prefetch" href="/assets/js/40.11218ea1.js"><link rel="prefetch" href="/assets/js/41.4c267658.js"><link rel="prefetch" href="/assets/js/42.dff30f41.js"><link rel="prefetch" href="/assets/js/43.8f2b46be.js"><link rel="prefetch" href="/assets/js/44.c765080a.js"><link rel="prefetch" href="/assets/js/45.d0aca86c.js"><link rel="prefetch" href="/assets/js/46.3fcd3795.js"><link rel="prefetch" href="/assets/js/48.79858285.js"><link rel="prefetch" href="/assets/js/49.1d5927f8.js"><link rel="prefetch" href="/assets/js/5.b8f1876b.js"><link rel="prefetch" href="/assets/js/50.0943b738.js"><link rel="prefetch" href="/assets/js/51.715b8f2e.js"><link rel="prefetch" href="/assets/js/6.3a042769.js"><link rel="prefetch" href="/assets/js/7.58400f25.js"><link rel="prefetch" href="/assets/js/8.03f273dd.js"><link rel="prefetch" href="/assets/js/9.4354e46a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e853742c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>Danny Blog</h3> <p class="description" data-v-59e6cb88>看见 思考 行动</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>Danny</span>
+          
+        <!---->
+        2025
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Danny Blog</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/Big-Data/" class="nav-link"><i class="undefined"></i>
+  Big-Data
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Life/" class="nav-link"><i class="undefined"></i>
+  Life
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Philosophy/" class="nav-link"><i class="undefined"></i>
+  Philosophy
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Program/" class="nav-link"><i class="undefined"></i>
+  Program
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/categories/Philosophy/" class="nav-link"><i class="iconfont reco-date"></i>
+  Philosophy
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><a href="/mythink/about_me.html" class="nav-link"><i class="undefined"></i>
+  About Me
+</a></div><div class="nav-item"><a href="https://github.com/meicanhong" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/avatar.jpg" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    Danny
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>37</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>18</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/Big-Data/" class="nav-link"><i class="undefined"></i>
+  Big-Data
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Life/" class="nav-link"><i class="undefined"></i>
+  Life
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Philosophy/" class="nav-link"><i class="undefined"></i>
+  Philosophy
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Program/" class="nav-link"><i class="undefined"></i>
+  Program
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/categories/Philosophy/" class="nav-link"><i class="iconfont reco-date"></i>
+  Philosophy
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><a href="/mythink/about_me.html" class="nav-link"><i class="undefined"></i>
+  About Me
+</a></div><div class="nav-item"><a href="https://github.com/meicanhong" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>AI Agent 上下文工程实践：从长任务崩溃到稳定运行</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>Danny</span>
+          
+        <!---->
+        2025
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">AI Agent 上下文工程实践：从长任务崩溃到稳定运行</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>Danny</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2025/11/24</span></i> <!----> <!----></div></div> <div class="theme-reco-content content__default"><h1 id="ai-agent-上下文工程实践-从长任务崩溃到稳定运行"><a href="#ai-agent-上下文工程实践-从长任务崩溃到稳定运行" class="header-anchor">#</a> AI Agent 上下文工程实践：从长任务崩溃到稳定运行</h1> <p>在构建高性能 AI Agent 的过程中，我发现真正限制长任务成功率的，往往不是底层模型能力，而是上下文管理。经过多次框架重构和数百万真实用户会话的验证，我们在 MaybeAi 沉淀出一套高度结构化的上下文工程体系。</p> <h2 id="为什么上下文工程是核心竞争力"><a href="#为什么上下文工程是核心竞争力" class="header-anchor">#</a> 为什么上下文工程是核心竞争力</h2> <p>Agent 竞争不是比模型，是比整个系统。真正影响成功率的，往往是任务拆解、工具链、失败重试、上下文管理这些工程细节。更关键的是，这套&quot;上下文工程&quot;的实践经验不是天上掉下来的，它需要在真实任务场景里一刀一枪练出来。</p> <p>我们的 Agent 平均每个会话需要 50 步工具调用，处理的任务包括多文件数据分析、跨平台内容抓取、复杂报告生成等。如果上下文管理不当，Agent 会在第 20 步左右开始&quot;目标漂移&quot;，或者因为上下文窗口溢出直接崩溃。</p> <h2 id="上下文设计的核心原则"><a href="#上下文设计的核心原则" class="header-anchor">#</a> 上下文设计的核心原则</h2> <h3 id="文件系统是无限外部记忆"><a href="#文件系统是无限外部记忆" class="header-anchor">#</a> 文件系统是无限外部记忆</h3> <p>把文件系统视为 Agent 的&quot;终极上下文&quot;：无限大小、持久化、可直接操作。任何大块内容（网页全文、CSV 数据、PDF、长日志）绝不直接放入上下文，而是保存到文件，只保留路径和必要摘要。</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token comment"># 错误做法：把完整 CSV 内容放进上下文</span>
+observation <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f&quot;CSV content: </span><span class="token interpolation"><span class="token punctuation">{</span>full_csv_content<span class="token punctuation">}</span></span><span class="token string">&quot;</span></span>  <span class="token comment"># 可能几万行</span>
+
+<span class="token comment"># 正确做法：外部化存储，只保留元信息</span>
+save_file<span class="token punctuation">(</span><span class="token string">&quot;/data/stock_data.csv&quot;</span><span class="token punctuation">,</span> csv_content<span class="token punctuation">)</span>
+observation <span class="token operator">=</span> <span class="token string">&quot;File saved to /data/stock_data.csv (756 rows, date range 2022-12-14 to 2025-12-14)&quot;</span>
+</code></pre></div><h3 id="可逆压缩"><a href="#可逆压缩" class="header-anchor">#</a> 可逆压缩</h3> <p>信息压缩后必须可恢复。我们不是丢弃信息，而是把它移到文件系统，需要时通过主动读取工具拉回。</p> <p>比如处理一个 50 页的 PDF 财报：</p> <ul><li>上下文中只放：&quot;这是一份 50 页财报，关键点是营收增长 20%，路径：/reports/q3.pdf&quot;</li> <li>完整 PDF 内容存在文件里</li> <li>后续需要时，Agent 调用 <code>read_file(&quot;/reports/q3.pdf&quot;)</code> 获取</li></ul> <h3 id="注意力操纵-recitation-机制"><a href="#注意力操纵-recitation-机制" class="header-anchor">#</a> 注意力操纵：Recitation 机制</h3> <p>这是我们对抗&quot;lost-in-the-middle&quot;问题的核心武器。通过将最关键的信息（如当前计划和进度）强制追加到上下文最末尾，确保 LLM 的注意力机制优先看到。</p> <p>核心文件是 <code>todo.md</code>：</p> <div class="language-markdown extra-class"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">#</span> 整体目标：分析 NVDA、MRVL、TSM 过去 3 年股票相关性并生成投资报告</span>
+
+<span class="token list punctuation">-</span> [x] 获取过去 3 年每日收盘价数据
+<span class="token list punctuation">-</span> [x] 下载并保存为 CSV 文件
+<span class="token list punctuation">-</span> [x] 清洗数据（处理缺失值、对齐日期）
+<span class="token list punctuation">-</span> [ ] 计算 Pearson 相关系数矩阵
+<span class="token list punctuation">-</span> [ ] 绘制相关性热力图和股价时间序列图
+<span class="token list punctuation">-</span> [ ] 分析见解
+<span class="token list punctuation">-</span> [ ] 评估风险
+<span class="token list punctuation">-</span> [ ] 生成最终报告
+
+当前进度：数据已清洗，下一步计算相关性。
+全局提醒：报告需客观、专业。
+</code></pre></div><p>每完成一个主要阶段（通常 3-10 步工具调用），Agent 必须更新 <code>todo.md</code>，然后系统自动将最新内容追加到上下文末尾。</p> <h2 id="固定的四层上下文结构"><a href="#固定的四层上下文结构" class="header-anchor">#</a> 固定的四层上下文结构</h2> <p>我们严格遵循以下四层顺序拼接上下文，确保可预测性和稳定性：</p> <div class="language- extra-class"><pre class="language-text"><code>┌────────────────────────────────────────────┐
+│ 1. 系统提示（固定，最前）                    │
+├────────────────────────────────────────────┤
+│ 2. 历史行动-观察对（从旧到新，追加式）         │
+│    &lt;action&gt; ... &lt;/action&gt;                    │
+│    &lt;observation&gt; ... &lt;/observation&gt;          │
+│    &lt;action&gt; ... &lt;/action&gt;                    │
+│    &lt;observation&gt; ... &lt;/observation&gt;          │
+│    ...                                     │
+├────────────────────────────────────────────┤
+│ 3. 当前轮临时读取的文件内容（可选，仅本轮）     │
+├────────────────────────────────────────────┤
+│ 4. 关键文件 recitation（强制，最末尾）         │
+│    └─ todo.md 最新完整内容（必有）            │
+│    └─ 其他关键文件（如 insights.md，可选）    │
+└────────────────────────────────────────────┘
+</code></pre></div><h3 id="第一层-系统提示"><a href="#第一层-系统提示" class="header-anchor">#</a> 第一层：系统提示</h3> <p>固定不变，放在最前面。包含 Agent 身份、能力描述、工具定义、核心原则。</p> <div class="language- extra-class"><pre class="language-text"><code>You are MaybeAi, a powerful AI agent capable of browsing the web, executing code, reading/writing files, etc.
+Tools available: browser_*, shell_*, read_file, write_file, ...
+Key principles: Use files as external memory. Always update todo.md after each major step. Keep context lean by summarizing large content...
+</code></pre></div><h3 id="第二层-历史行动-观察对"><a href="#第二层-历史行动-观察对" class="header-anchor">#</a> 第二层：历史行动-观察对</h3> <p>追加式（append-only），从最旧到最新依次排列。每对的固定格式：</p> <div class="language-xml extra-class"><pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>action</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>write_file</span> <span class="token attr-name">path</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>todo.md<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+# 整体目标：分析股票相关性
+- [ ] 获取数据
+...
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>write_file</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>action</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>observation</span><span class="token punctuation">&gt;</span></span>
+File todo.md created successfully.
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>observation</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>action</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>browser_navigate</span> <span class="token attr-name">url</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>https://finance.yahoo.com<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>action</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>observation</span><span class="token punctuation">&gt;</span></span>
+Page loaded. Title: Yahoo Finance - Stock Market Live...
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>observation</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>关键点：observation 里绝不放完整大内容，只放路径 + 摘要。</p> <h3 id="第三层-当前轮临时读取内容"><a href="#第三层-当前轮临时读取内容" class="header-anchor">#</a> 第三层：当前轮临时读取内容</h3> <p>仅在本轮需要时出现。如果 Agent 上一步调用了 <code>read_file</code>、<code>head</code>、<code>grep</code> 等，工具返回的内容会直接追加在这里，作为本轮的&quot;即时记忆&quot;。</p> <div class="language-xml extra-class"><pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>action</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>read_file</span> <span class="token attr-name">path</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>/data/stock_data.csv<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>action</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>observation</span><span class="token punctuation">&gt;</span></span>
+Date,Close
+2022-12-14,178.35
+2022-12-15,180.22
+...
+(756 rows total, showing first 100)
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>observation</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>下轮如果不再需要，这些内容不会被永久保留（除非 Agent 主动写到文件里）。</p> <h3 id="第四层-关键文件-recitation"><a href="#第四层-关键文件-recitation" class="header-anchor">#</a> 第四层：关键文件 Recitation</h3> <p>这是整个上下文结构的&quot;杀手锏&quot;，几乎每轮都必须有。放置位置：整个 context 的绝对末尾（最近位置），确保 LLM 的注意力机制优先看到。</p> <div class="language-markdown extra-class"><pre class="language-markdown"><code>[todo.md content start]
+<span class="token title important"><span class="token punctuation">#</span> 整体目标：分析 NVDA、MRVL、TSM 过去 3 年股票相关性并生成投资报告</span>
+
+<span class="token list punctuation">-</span> [x] 获取过去 3 年每日收盘价数据
+<span class="token list punctuation">-</span> [x] 下载并保存为 CSV 文件
+<span class="token list punctuation">-</span> [x] 清洗数据
+<span class="token list punctuation">-</span> [ ] 计算 Pearson 相关系数矩阵
+...
+
+当前进度：数据已清洗，下一步计算相关性。
+[todo.md content end]
+</code></pre></div><h2 id="长任务中的读写流程"><a href="#长任务中的读写流程" class="header-anchor">#</a> 长任务中的读写流程</h2> <p>以&quot;分析 NVDA、MRVL、TSM 过去三年股票价格相关性并生成投资报告&quot;为例，展示完整的上下文演变过程。</p> <h3 id="任务启动-第-1-轮"><a href="#任务启动-第-1-轮" class="header-anchor">#</a> 任务启动（第 1 轮）</h3> <div class="language- extra-class"><pre class="language-text"><code>[系统提示]
+You are MaybeAi, a powerful AI agent...
+
+[历史行动-观察对]  // 目前为空
+
+[用户任务]
+分析 NVIDIA (NVDA)、Marvell Technology (MRVL) 和 TSMC (TSM) 过去三年股票价格的相关性，
+计算 Pearson 相关系数，绘制热力图和时间序列图，最后生成一份投资报告。
+
+[Agent 行动 1]
+&lt;write_file path=&quot;todo.md&quot;&gt;
+# 整体目标：分析 NVDA、MRVL、TSM 过去 3 年股票相关性并生成投资报告
+
+- [ ] 获取过去 3 年每日收盘价数据
+- [ ] 下载并保存为 CSV 文件
+- [ ] 清洗数据
+- [ ] 计算 Pearson 相关系数矩阵
+- [ ] 绘制相关性热力图和股价时间序列图
+- [ ] 分析见解
+- [ ] 评估风险
+- [ ] 生成最终报告
+
+当前进度：刚开始。
+&lt;/write_file&gt;
+
+[观察 1]
+File todo.md created successfully.
+
+[todo.md 最新内容 - recitation]
+# 整体目标：分析 NVDA、MRVL、TSM 过去 3 年股票相关性并生成投资报告
+...（完整内容）
+</code></pre></div><p>此时上下文大约 3-4k tokens。</p> <h3 id="数据下载完成-第-8-轮"><a href="#数据下载完成-第-8-轮" class="header-anchor">#</a> 数据下载完成（第 8 轮）</h3> <div class="language- extra-class"><pre class="language-text"><code>[系统提示]  // 固定
+
+[历史行动-观察对]  // 前面 7 轮的历史
+&lt;action&gt; download NVDA CSV &lt;/action&gt;
+&lt;observation&gt; File saved to /data/nvda_data.csv (756 rows) &lt;/observation&gt;
+
+&lt;action&gt; download MRVL CSV &lt;/action&gt;
+&lt;observation&gt; File saved to /data/mrvl_data.csv (756 rows) &lt;/observation&gt;
+
+&lt;action&gt; download TSM CSV &lt;/action&gt;
+&lt;observation&gt; File saved to /data/tsm_data.csv (756 rows) &lt;/observation&gt;
+
+&lt;action&gt; 更新 todo.md &lt;/action&gt;
+&lt;observation&gt; todo.md updated &lt;/observation&gt;
+
+[todo.md 最新内容 - recitation]
+- [x] 获取过去 3 年每日收盘价数据
+- [x] 下载并保存为 CSV 文件
+- [ ] 清洗数据（处理缺失值、对齐日期）
+...
+
+当前进度：数据已下载，下一步清洗。
+</code></pre></div><p>此时上下文大约 15-20k tokens。注意：CSV 原始数据完全没进来，只在观察里提了一句路径。</p> <h3 id="数据清洗阶段-第-12-轮"><a href="#数据清洗阶段-第-12-轮" class="header-anchor">#</a> 数据清洗阶段（第 12 轮）</h3> <p>Agent 决定清洗数据，需要读取 CSV。</p> <div class="language- extra-class"><pre class="language-text"><code>[系统提示 + 历史行动-观察对]  // 前面所有历史
+
+[最近行动]
+&lt;read_file path=&quot;/data/nvda_data.csv&quot; /&gt;
+&lt;read_file path=&quot;/data/mrvl_data.csv&quot; /&gt;
+&lt;read_file path=&quot;/data/tsm_data.csv&quot; /&gt;
+
+[观察]
+nvda_data.csv content: (返回前 100 行 + 统计摘要)
+Date,Close
+2022-12-14,178.35
+...
+(756 rows total)
+
+[todo.md 最新内容 - recitation]
+- [x] 获取...
+- [x] 下载...
+- [ ] 清洗数据（处理缺失值、对齐日期）   ← 当前焦点
+...
+</code></pre></div><p>这轮上下文临时变大（因为读了三个 CSV 片段），但下轮清洗完后，Agent 会把清洗结果保存为新文件 <code>cleaned_data.csv</code>，下次就不需要再读原始 CSV 了。</p> <h3 id="任务接近尾声-第-25-轮"><a href="#任务接近尾声-第-25-轮" class="header-anchor">#</a> 任务接近尾声（第 25 轮）</h3> <div class="language- extra-class"><pre class="language-text"><code>[系统提示 + 完整历史行动-观察对]  // 约 50 步历史
+
+[最近几轮关键观察摘要]
+- cleaned_data.csv saved (756 aligned rows)
+- Pearson correlation matrix: NVDA-MRVL: 0.85, NVDA-TSM: 0.78
+- heatmap.png saved to /images/heatmap.png
+- price_chart.png saved to /images/price_chart.png
+- insights.md written
+- todo.md updated: all items checked except final report
+
+[todo.md 最新内容 - recitation]
+- [x] 获取过去 3 年每日收盘价数据
+- [x] 下载并保存为 CSV 文件
+- [x] 清洗数据
+- [x] 计算 Pearson 相关系数矩阵
+- [x] 绘制相关性热力图和股价时间序列图
+- [x] 分析见解
+- [x] 评估风险
+- [ ] 生成最终报告（Markdown + 图表）
+
+当前进度：所有分析完成，只剩合成报告。
+</code></pre></div><p>最终生成报告时，Agent 会再次 <code>read_file</code> 读取 <code>insights.md</code>、图路径等必要片段，合成最终 Markdown。</p> <h2 id="关键文件的使用规范"><a href="#关键文件的使用规范" class="header-anchor">#</a> 关键文件的使用规范</h2> <h3 id="todo-md-agent-的外部大脑"><a href="#todo-md-agent-的外部大脑" class="header-anchor">#</a> todo.md：Agent 的外部大脑</h3> <p>每完成一个主要阶段（通常 3-10 步工具调用）必须更新：</p> <ul><li>勾选已完成项</li> <li>调整剩余任务顺序</li> <li>重述全局目标</li></ul> <p>更新后立即 recitation 到上下文末尾。</p> <h3 id="其他常见文件"><a href="#其他常见文件" class="header-anchor">#</a> 其他常见文件</h3> <table><thead><tr><th>文件类型</th> <th>用途</th> <th>示例</th></tr></thead> <tbody><tr><td>中间数据</td> <td>存储处理结果</td> <td><code>cleaned_data.csv</code>, <code>analysis_result.json</code></td></tr> <tr><td>错误日志</td> <td>保留完整错误栈</td> <td><code>error_log.txt</code>, <code>logs.json</code></td></tr> <tr><td>草稿笔记</td> <td>临时思考和见解</td> <td><code>insights.md</code>, <code>draft.md</code>, <code>scratchpad.txt</code></td></tr> <tr><td>图像路径</td> <td>生成的图表</td> <td><code>heatmap.png</code>, <code>price_chart.png</code></td></tr></tbody></table> <p>这些文件按需读取，读取后内容仅用于当前或后续几轮推理。</p> <h2 id="四大工程模块的核心经验"><a href="#四大工程模块的核心经验" class="header-anchor">#</a> 四大工程模块的核心经验</h2> <h3 id="任务拆解"><a href="#任务拆解" class="header-anchor">#</a> 任务拆解</h3> <p><strong>核心做法</strong>：</p> <ul><li>将复杂任务拆解为 ~50 步工具调用链，每步遵循&quot;选择行动 → 执行 → 追加观察&quot;的循环</li> <li>使用 <code>todo.md</code> 作为&quot;外部大脑&quot;，明确分解粒度（按&quot;5 秒级操作单元&quot;）</li> <li>支持子代理（sub-agents）隔离子任务，共享上下文但独立窗口</li></ul> <p><strong>关键教训</strong>：</p> <ul><li>长序列易导致&quot;目标漂移&quot;和&quot;中间丢失&quot;问题</li> <li>通过 recitation 机制，成功率提升 20-30%，无需重训模型</li> <li>任务粒度过粗会导致级联失败，优化后按&quot;5 秒级操作单元&quot;拆解</li></ul> <h3 id="工具链"><a href="#工具链" class="header-anchor">#</a> 工具链</h3> <p><strong>核心做法</strong>：</p> <ul><li>采用上下文感知状态机管理工具，不动态加载/卸载（避免 KV-cache 失效）</li> <li>用 logit masking（解码时屏蔽 token 概率）约束选择</li> <li>工具设计标准化：统一前缀（如 <code>browser_*</code>, <code>shell_*</code>），总工具数控制在 &lt;20 个原子工具</li></ul> <p><strong>关键教训</strong>：</p> <ul><li>动态工具切换在生产中常引发&quot;schema violation&quot;</li> <li>masking 后，工具调用稳定性达 99%</li> <li>通过前缀分组和沙箱，减少了 80% 的工具输出噪声</li></ul> <h3 id="失败重试"><a href="#失败重试" class="header-anchor">#</a> 失败重试</h3> <p><strong>核心做法</strong>：</p> <ul><li>保留所有失败痕迹：行动、观察和错误日志追加到上下文中</li> <li>自调试机制：日志流记录失败上下文，供重试时引用</li> <li>支持&quot;部分回滚&quot;：失败步骤隔离重跑，而非全序列重启</li></ul> <p><strong>关键教训</strong>：</p> <ul><li>隐藏失败是&quot;伪优化&quot;：早期版本清理错误导致模型重复犯错</li> <li>保留失败后，Agent 学会&quot;避坑&quot;，重试效率提升</li> <li>错误恢复率从 30% 升至 70%</li></ul> <h3 id="上下文管理"><a href="#上下文管理" class="header-anchor">#</a> 上下文管理</h3> <p><strong>核心做法</strong>：</p> <ul><li>文件系统作为&quot;无限上下文&quot;，保存中间结果</li> <li>可恢复压缩：大文件外部化但留路径，确保信息不永久丢失</li> <li>操纵注意力：通过 todo 背诵推全局计划到上下文末尾</li> <li>确定性追加：稳定 JSON 序列化，避免时间戳变异</li></ul> <p><strong>关键教训</strong>：</p> <ul><li>上下文膨胀是 Agent 杀手：无优化时，50 步后窗口溢出</li> <li>文件外部化 + 压缩后，成本降 50%，支持长任务</li> <li>上下文工程是&quot;船而非建筑&quot;：随模型进步迭代</li></ul> <h2 id="实际效果"><a href="#实际效果" class="header-anchor">#</a> 实际效果</h2> <p>经过这套体系的打磨，我们在 MaybeAi 取得了以下成果：</p> <table><thead><tr><th>指标</th> <th>优化前</th> <th>优化后</th> <th>提升</th></tr></thead> <tbody><tr><td>长任务成功率</td> <td>50%</td> <td>96%+</td> <td>+92%</td></tr> <tr><td>上下文 token 消耗</td> <td>基准</td> <td>-50%</td> <td>成本减半</td></tr> <tr><td>错误恢复率</td> <td>30%</td> <td>70%</td> <td>+133%</td></tr> <tr><td>支持最大步数</td> <td>~20 步</td> <td>50+ 步</td> <td>+150%</td></tr> <tr><td>目标漂移率</td> <td>高</td> <td>近零</td> <td>显著改善</td></tr></tbody></table> <p>在第三方基准测试中，自动化率和多步任务成功率位居前列。用户反馈：&quot;Agent 记性超好，不会忘中间结果&quot;、&quot;现在它像个可靠的助手，不会半途而废&quot;。</p> <h2 id="核心洞察"><a href="#核心洞察" class="header-anchor">#</a> 核心洞察</h2> <p>回顾整个上下文工程的迭代过程，几个关键认知：</p> <p><strong>失败不是 bug，而是 feature</strong>。保留失败痕迹让 Agent 能够自适应学习，避免重复犯错。</p> <p><strong>上下文不是垃圾桶，而是可塑工具</strong>。Agent 不是死记硬背，而是像程序员一样&quot;查文件、看笔记&quot;。</p> <p><strong>文件系统是最好的外部记忆</strong>。无限大小、持久化、可直接操作，完美解决上下文窗口限制。</p> <p><strong>Recitation 是对抗遗忘的利器</strong>。将关键信息强制放在上下文末尾，利用 LLM 的注意力机制特性。</p> <p><strong>工程壁垒远超模型</strong>。当大模型能力趋于同质化，上下文工程已成为 Agent 领域最值得深耕的差异化方向。</p> <h2 id="总结"><a href="#总结" class="header-anchor">#</a> 总结</h2> <p>这套结构化、文件驱动、可逆的上下文管理体系，既是我们在生产环境中的实战结晶，也适用于任何希望构建可靠长任务 Agent 的团队。</p> <p>上下文工程不是一次性设计，而是持续迭代的过程。我们经历了四次框架重构，每次都是从真实用户反馈中提炼原则。这个过程没有捷径，必须在真实任务场景里一刀一枪练出来。</p> <p>未来，随着模型上下文窗口继续扩大，这套体系仍将保持价值——因为高效的记忆管理永远是智能体的核心竞争力。</p></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/program/agent-context-engineering.html#为什么上下文工程是核心竞争力" class="sidebar-link reco-side-为什么上下文工程是核心竞争力" data-v-b57cc07c>为什么上下文工程是核心竞争力</a></li><li class="level-2" data-v-b57cc07c><a href="/program/agent-context-engineering.html#上下文设计的核心原则" class="sidebar-link reco-side-上下文设计的核心原则" data-v-b57cc07c>上下文设计的核心原则</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#文件系统是无限外部记忆" class="sidebar-link reco-side-文件系统是无限外部记忆" data-v-b57cc07c>文件系统是无限外部记忆</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#可逆压缩" class="sidebar-link reco-side-可逆压缩" data-v-b57cc07c>可逆压缩</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#注意力操纵-recitation-机制" class="sidebar-link reco-side-注意力操纵-recitation-机制" data-v-b57cc07c>注意力操纵：Recitation 机制</a></li><li class="level-2" data-v-b57cc07c><a href="/program/agent-context-engineering.html#固定的四层上下文结构" class="sidebar-link reco-side-固定的四层上下文结构" data-v-b57cc07c>固定的四层上下文结构</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#第一层-系统提示" class="sidebar-link reco-side-第一层-系统提示" data-v-b57cc07c>第一层：系统提示</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#第二层-历史行动-观察对" class="sidebar-link reco-side-第二层-历史行动-观察对" data-v-b57cc07c>第二层：历史行动-观察对</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#第三层-当前轮临时读取内容" class="sidebar-link reco-side-第三层-当前轮临时读取内容" data-v-b57cc07c>第三层：当前轮临时读取内容</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#第四层-关键文件-recitation" class="sidebar-link reco-side-第四层-关键文件-recitation" data-v-b57cc07c>第四层：关键文件 Recitation</a></li><li class="level-2" data-v-b57cc07c><a href="/program/agent-context-engineering.html#长任务中的读写流程" class="sidebar-link reco-side-长任务中的读写流程" data-v-b57cc07c>长任务中的读写流程</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#任务启动-第-1-轮" class="sidebar-link reco-side-任务启动-第-1-轮" data-v-b57cc07c>任务启动（第 1 轮）</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#数据下载完成-第-8-轮" class="sidebar-link reco-side-数据下载完成-第-8-轮" data-v-b57cc07c>数据下载完成（第 8 轮）</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#数据清洗阶段-第-12-轮" class="sidebar-link reco-side-数据清洗阶段-第-12-轮" data-v-b57cc07c>数据清洗阶段（第 12 轮）</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#任务接近尾声-第-25-轮" class="sidebar-link reco-side-任务接近尾声-第-25-轮" data-v-b57cc07c>任务接近尾声（第 25 轮）</a></li><li class="level-2" data-v-b57cc07c><a href="/program/agent-context-engineering.html#关键文件的使用规范" class="sidebar-link reco-side-关键文件的使用规范" data-v-b57cc07c>关键文件的使用规范</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#todo-md-agent-的外部大脑" class="sidebar-link reco-side-todo-md-agent-的外部大脑" data-v-b57cc07c>todo.md：Agent 的外部大脑</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#其他常见文件" class="sidebar-link reco-side-其他常见文件" data-v-b57cc07c>其他常见文件</a></li><li class="level-2" data-v-b57cc07c><a href="/program/agent-context-engineering.html#四大工程模块的核心经验" class="sidebar-link reco-side-四大工程模块的核心经验" data-v-b57cc07c>四大工程模块的核心经验</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#任务拆解" class="sidebar-link reco-side-任务拆解" data-v-b57cc07c>任务拆解</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#工具链" class="sidebar-link reco-side-工具链" data-v-b57cc07c>工具链</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#失败重试" class="sidebar-link reco-side-失败重试" data-v-b57cc07c>失败重试</a></li><li class="level-3" data-v-b57cc07c><a href="/program/agent-context-engineering.html#上下文管理" class="sidebar-link reco-side-上下文管理" data-v-b57cc07c>上下文管理</a></li><li class="level-2" data-v-b57cc07c><a href="/program/agent-context-engineering.html#实际效果" class="sidebar-link reco-side-实际效果" data-v-b57cc07c>实际效果</a></li><li class="level-2" data-v-b57cc07c><a href="/program/agent-context-engineering.html#核心洞察" class="sidebar-link reco-side-核心洞察" data-v-b57cc07c>核心洞察</a></li><li class="level-2" data-v-b57cc07c><a href="/program/agent-context-engineering.html#总结" class="sidebar-link reco-side-总结" data-v-b57cc07c>总结</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.1b3b61c0.js" defer></script><script src="/assets/js/3.2a1770ca.js" defer></script><script src="/assets/js/1.b21f7e85.js" defer></script><script src="/assets/js/47.5c12416d.js" defer></script>
+  </body>
+</html>
