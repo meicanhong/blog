@@ -166,13 +166,10 @@
             <div class="info-item"><span class="info-label">性别：</span>男</div>
             <div class="info-item"><span class="info-label">年龄：</span>25</div>
             <div class="info-item"><span class="info-label">学历：</span>本科</div>
-            <div class="info-item"><span class="info-label">专业：</span>网络工程</div>
             <div class="info-item"><span class="info-label">电话：</span>13059277414</div>
             <div class="info-item"><span class="info-label">邮箱：</span>canhong5357003@gmail.com</div>
-            <div class="info-item"><span class="info-label">GitHub：</span><a href="https://github.com/meicanhong"
-                    style="color: #0066cc; text-decoration: none;">github.com/meicanhong</a></div>
-            <div class="info-item"><span class="info-label">博客：</span><a href="https://meicanhong.github.io/blog/"
-                    style="color: #0066cc; text-decoration: none;">meicanhong.github.io/blog</a></div>
+            <div class="info-item"><span class="info-label">博客：</span><a href="https://meicanhong.github.io"
+                    style="color: #0066cc; text-decoration: none;">meicanhong.github.io</a></div>
         </div>
 
         <h2>项目经历</h2>
@@ -205,17 +202,11 @@
             <div class="project-role">后端工程师　2023.10 – 2024.08</div>
         </div>
         <ul>
-            <li>负责开发 Ads3 <strong>核心活动引擎</strong>，支持概率抽奖、人满开团、定时开奖、裂变任务等 <strong>8+ 活动玩法</strong>，日均 PV
-                <strong>10w+</strong>，单日最高 <strong>2000+ 同时在线活动</strong>，支持 <strong>1w+ 用户并发</strong>无明显延迟</li>
-            <li>设计并开发<strong>平台钱包系统从 0 到 1</strong>，支持 TON、Solana、BNB Chain、Polygon
-                <strong>多链</strong>，覆盖链上充值、提现及资金流全链路追踪，防刷钱包风控规则生效，资金准确率 <strong>100%</strong>，日充值提现金额峰值超 <strong>20
-                    万美金</strong></li>
-            <li>主导 <strong>Telegram 生态任务系统</strong>开发，对接 Telegram Mini App 官方 API 与 TON 链上任务，实现用户登录、每日签到、邀请裂变、链上行为验证等
-                <strong>20+ 任务类型</strong>，3 个月内帮助平台冷启动用户突破 <strong>100w+</strong></li>
-            <li>设计并开发运营后台（React + NestJS），实现活动一键创建/编辑/上下架、资金归集与分发、实时数据大屏等功能，将运营发活动时间<strong>从 2 小时缩短至 5
-                    分钟</strong>，运营效率提升超 <strong>90%</strong></li>
-            <li>搭建完整<strong>反作弊与风控体系</strong>（IP/设备指纹/行为分析 + 链上地址黑名单），作弊用户识别率 <strong>>98%</strong>，为平台节约刷量成本超
-                <strong>100 万美金</strong></li>
+            <li>设计并实现<strong>核心活动引擎与任务系统</strong>，构建统一事件驱动架构支持概率抽奖、拼团、定时开奖、裂变任务、俄罗斯转盘等 <strong>8+ 活动玩法</strong>；实现 Telegram 群验证、发言检测、邀请链追踪、链上行为验证等 <strong>20+ 任务类型</strong>，支撑平台 <strong>3 个月从 0 增长至 100 万用户</strong>，日活峰值 <strong>15 万+</strong></li>
+            <li>设计并实现<strong>跨链钱包充值提现系统</strong>，构建统一抽象层支持 TON 与 <strong>10+ 主流 EVM 链</strong>（Ethereum、BSC、Polygon 等）；通过链上事件监听 + 区块确认机制实现自动到账，充提时效 <strong>< 3 分钟</strong>，交易成功率 <strong>99.8%</strong></li>
+            <li>设计并实现 <strong>AI 智能客服 SaaS 平台</strong>，基于 RAG + LLM 构建多租户 Telegram Bot 系统，支持品牌方上传项目知识库、自定义回复风格与话术模板、可视化配置工具开关（联网搜索、实时新闻等）；通过向量检索 + 上下文记忆实现精准问答，并提供 Q&A 测试集验证知识库质量</li>
+            <li>设计并实现 <strong>AI 智能风控审核系统</strong>，基于用户行为图谱分析与资金流水模式识别，构建多维度异常检测模型；自动识别羊毛党团伙的异常提现行为，并及时告警通知运维人员</li>
+            <li>设计并实现运营后台（React + NestJS），实现活动一键创建/编辑/上下架、资金归集与分发、实时数据大屏等功能，将运营发活动时间<strong>从 2 小时缩短至 5 分钟</strong>，运营效率提升超 <strong>90%</strong></li>
         </ul>
 
         <div class="project-header" style="padding-top: 60px;">
@@ -223,14 +214,12 @@
             <div class="project-role">区块链数据基础设施工程师　2022.09 – 2023.10</div>
         </div>
         <ul>
-            <li>负责<strong>多链统一分析引擎与查询服务</strong>的开发与稳定性建设，面向 <strong>40+ EVM 与非 EVM 链</strong>，支撑日均 <strong>10 万+
-                    次复杂分析查询</strong>，作为平台核心数据底座</li>
-            <li>负责 Trino + Doris + Iceberg + Flink <strong>技术栈选型与深度调优</strong>，针对多链异构 Schema、高基数 Join 场景，将跨链复杂查询 P95
-                延迟<strong>从 300s+ 优化至 10s 内</strong>，实现准实时交互式分析体验</li>
-            <li>设计并实现<strong>多链实时数据收录与增量更新 Pipeline</strong>，日处理原始链上数据 <strong>300GB+</strong>，覆盖 <strong>40+
-                    主流公链</strong>（Ethereum、BSC、Solana、Sui 等），保障 <strong>99.99%+ 数据完整性</strong>与时效性</li>
-            <li>自主研发<strong>多链地址标签与巨鲸行为分析体系</strong>，支持高频地址评分与行为聚合，日处理关键地址 <strong>300 万+</strong>，相关数据能力被多家头部机构直接采购使用
-            </li>
+            <li>负责大数据基础设施架构升级与性能优化，推动<strong>2 次架构迭代</strong>，最终构建 <strong>Trino + Iceberg + Doris + Flink</strong> 技术栈，支撑日均 <strong>10 万+ 次</strong> 跨链复杂分析查询；将查询时延 P95 <strong>从 3 分钟优化至 10 秒内</strong>，内部生产任务执行成功率提升至 <strong>99%</strong>，云服务成本降低 <strong>50%</strong></li>
+            <li>独立构建多链底层数据收录系统，实时收录 <strong>40+ EVM 与非 EVM 链</strong> 原始数据（Transactions、Logs、Blocks、Traces、Token Transfers），日处理 <strong>300GB+</strong> 链上数据，数据完整性及准确率达 99.99%。该系统已成功商业化，为多家头部 Web3 机构提供底层数据源支持。</li>
+            <li>为全球知名 GameFi 投资机构设计并交付实时分析系统，覆盖 DAU、NFT 铸造量等 15+ 核心指标；通过优化 Flink 流计算与向量化查询，实现秒级刷新（延迟 < 5s），支撑客户实时运营决策，并为公司带来数百万量级的年度商业价值。</li>
+            <li>主导大数据基础设施跨云迁移（GCP → 腾讯云），将 300TB+ 数据从 GCS 至 EMR HDFS 的零停机迁移。通过开发按分区并行同步、重构 Shuffle 逻辑、碎片文件合并等工具，将迁移效率提升 85%，实现每月 10 万美金级成本节省，保障数据 100% 完整性。</li>
+            <li>设计并实现覆盖 5,000+ 币种的高质量价格系统，时效性 < 5 分钟，准确率达金融级标准（99.99%）；该系统作为平台核心数据产品，广泛应用于行业头部 API 服务场景。</li>
+            <li>自然语言转 SQL（NL2SQL）系统：自主研发 NL2SQL 智能查询系统，支持用户通过自然语言生成复杂分析 SQL 并自动构建看板；系统 SQL 生成准确率达 90%，大幅降低了非技术用户的使用门槛，成为平台核心技术壁垒。</li>
         </ul>
 
         <h2>公司经历</h2>

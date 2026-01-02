@@ -9,7 +9,7 @@
 - **电话**：13059277414
 - **邮箱**：canhong5357003@gmail.com
 - **GitHub**：[github.com/meicanhong](https://github.com/meicanhong)
-- **博客**：[meicanhong.github.io/blog](https://meicanhong.github.io/blog/)
+- **博客**：[meicanhong.github.io](https://meicanhong.github.io)
 
 ## 项目经历
 
