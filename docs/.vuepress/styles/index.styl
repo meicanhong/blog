@@ -40,15 +40,15 @@
 .page-title .iconfont span
   color #c9d1d9 !important
 
-/* 统一所有标题间距 */
+/* 统一所有标题间距 - VS Code 默认 */
 .content__default:not(.custom) > h1,
 .content__default:not(.custom) > h2,
 .content__default:not(.custom) > h3,
 .content__default:not(.custom) > h4,
 .content__default:not(.custom) > h5,
 .content__default:not(.custom) > h6
-  margin-top 1.2rem !important
-  margin-bottom 0.6rem !important
+  margin-top 0.6em !important
+  margin-bottom 0.6em !important
   padding-top 0 !important
 
 h1, h2, h3, h4, h5, h6
@@ -56,16 +56,16 @@ h1, h2, h3, h4, h5, h6
   font-weight 600 !important
 
 h1
-  font-size 1.8rem !important
+  font-size 2.375rem !important
   border-bottom 1px solid #30363d !important
   padding-bottom 0.5rem
-  margin-top 1.2rem !important
-  margin-bottom 0.6rem !important
+  margin-top 0.6em !important
+  margin-bottom 0.6em !important
 
 h2
-  font-size 1.4rem !important
-  margin-top 1.2rem !important
-  margin-bottom 0.6rem !important
+  font-size 2rem !important
+  margin-top 0.6em !important
+  margin-bottom 0.6em !important
   padding-top 0 !important
   padding-left 0 !important
   position relative !important
@@ -74,48 +74,46 @@ h2::before
   display none !important
 
 h3
-  font-size 1.2rem !important
-  margin-top 0.8rem !important
-  margin-bottom 0.6rem !important
+  font-size 1.5rem !important
+  margin-top 0.6em !important
+  margin-bottom 0.6em !important
 
 h4
-  font-size 1.1rem !important
-  margin-top 0.8rem !important
-  margin-bottom 0.6rem !important
+  font-size 1.25rem !important
+  margin-top 0.6em !important
+  margin-bottom 0.6em !important
 
-/* 段落到标题的间距 */
-.theme-reco-content p + h1,
-.theme-reco-content p + h2,
-.theme-reco-content p + h3,
-.theme-reco-content p + h4
-  margin-top 1.5rem !important
+h5
+  font-size 1.125rem !important
+  margin-top 0.6em !important
+  margin-bottom 0.6em !important
+
+h6
+  font-size 1rem !important
+  margin-top 0.6em !important
+  margin-bottom 0.6em !important
 
 /* 正文第一个标题（紧跟作者信息后的标题） */
 .content__default:not(.custom) > h1:first-child
   margin-top 0.3rem !important
 
-/* 正文 */
+/* 正文 - 调整为 1rem */
 .theme-reco-content
   color #c9d1d9 !important
   font-size 1rem
   line-height 1.6
   max-width 50% !important
 
-/* 段落 */
+/* 段落 - VS Code 默认 */
 .theme-reco-content p
   color #c9d1d9 !important
-  margin-top 0.5rem !important
-  margin-bottom 0.5rem !important
+  margin 0 0 1rem 0 !important
 
 .theme-reco-content p:first-child
   margin-top 0 !important
 
 .theme-reco-content p:last-child
   margin-bottom 0 !important
-
-.theme-reco-content p + h2,
-.theme-reco-content p + h3
-  margin-top 1.5rem !important
 
 /* 链接 */
 .theme-reco-content a
