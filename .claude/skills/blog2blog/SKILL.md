@@ -9,8 +9,9 @@ description: 将现有技术博客重写为更自然、有温度的风格。当�
 
 1. 读取 [reference.md](./reference.md) 中的完整风格指南
 2. 分析现有博客的技术内容和结构
-3. 按照 reference.md 中的风格要求重写文章
-4. 保存重写后的文章到项目的 docs/program 目录下
+3. **如果文章涉及技术概念介绍，使用 multi-search-aggregator agent 搜索相关资料**
+4. 按照 reference.md 中的风格要求重写文章
+5. 保存重写后的文章到项目的 docs/program 目录下
 
 ## 输出格式
 
