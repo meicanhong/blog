@@ -2,7 +2,7 @@ export default ({ router }) => {
   if (typeof window !== 'undefined') {
     const applyGitHubColors = () => {
       const root = document.documentElement
-      root.style.setProperty('--background-color', '#222831')
+      root.style.setProperty('--background-color', '#282C34')
       root.style.setProperty('--text-color', '#c9d1d9')
       root.style.setProperty('--text-color-sub', '#8b949e')
       root.style.setProperty('--border-color', '#30363d')
