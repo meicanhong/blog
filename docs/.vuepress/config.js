@@ -14,6 +14,8 @@ module.exports = {
     },
     themeConfig: {
         type: 'blog',
+        mode: 'dark',
+        modePicker: false,
         author: 'Danny',
         authorAvatar: '/avatar.jpg',
         subSidebar: 'auto',
@@ -35,7 +37,7 @@ module.exports = {
         blogConfig: {
             category: {
                 location: 1,     // 在导航栏菜单中所占的位置，默认2
-                text: 'Category' // 默认文案 “分类”
+                text: 'Category' // 默认文案 "分类"
             }
         }
     }

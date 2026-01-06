@@ -1,0 +1,253 @@
+/* GitHub Dark 主题 - CSS 变量 */
+:root
+  --background-color #0d1117
+  --text-color #c9d1d9
+  --text-color-sub #8b949e
+  --border-color #30363d
+  --code-color #161b22
+  --box-shadow 0 1px 8px 0 rgba(0, 0, 0, 0.5)
+  --box-shadow-hover 0 2px 16px 0 rgba(0, 0, 0, 0.6)
+
+/* GitHub Dark 主题 - 全局设置 */
+.page,
+.theme-container
+  font-family -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif !important
+  background #0d1117 !important
+
+/* 页面容器 */
+.page
+  max-width 1560px
+  margin 0 auto
+  padding 2rem
+  background #000000
+  border-radius 8px
+  box-shadow 0 8px 32px rgba(0, 0, 0, 0.5)
+  margin-top 2rem
+
+/* 标题 */
+.page-title .title
+  display none
+
+.page-title
+  max-width 50% !important
+  padding 0.2rem 0 0 0 !important
+  margin-bottom 0.3rem !important
+
+.page-title .iconfont
+  color #8b949e !important
+  font-size 0.85rem
+
+.page-title .iconfont span
+  color #c9d1d9 !important
+
+/* 统一所有标题间距 */
+.content__default:not(.custom) > h1,
+.content__default:not(.custom) > h2,
+.content__default:not(.custom) > h3,
+.content__default:not(.custom) > h4,
+.content__default:not(.custom) > h5,
+.content__default:not(.custom) > h6
+  margin-top 1.2rem !important
+  margin-bottom 0.6rem !important
+  padding-top 0 !important
+
+h1, h2, h3, h4, h5, h6
+  color #58a6ff !important
+  font-weight 600 !important
+
+h1
+  font-size 1.8rem !important
+  border-bottom 1px solid #30363d !important
+  padding-bottom 0.5rem
+  margin-top 1.2rem !important
+  margin-bottom 0.6rem !important
+
+h2
+  font-size 1.4rem !important
+  margin-top 1.2rem !important
+  margin-bottom 0.6rem !important
+  padding-top 0 !important
+  padding-left 0 !important
+  position relative !important
+
+h2::before
+  display none !important
+
+h3
+  font-size 1.2rem !important
+  margin-top 0.8rem !important
+  margin-bottom 0.6rem !important
+
+h4
+  font-size 1.1rem !important
+  margin-top 0.8rem !important
+  margin-bottom 0.6rem !important
+
+/* 段落到标题的间距 */
+.theme-reco-content p + h1,
+.theme-reco-content p + h2,
+.theme-reco-content p + h3,
+.theme-reco-content p + h4
+  margin-top 1.5rem !important
+
+/* 正文第一个标题（紧跟作者信息后的标题） */
+.content__default:not(.custom) > h1:first-child
+  margin-top 0.3rem !important
+
+/* 正文 */
+.theme-reco-content
+  color #c9d1d9 !important
+  font-size 1rem
+  line-height 1.6
+  max-width 50% !important
+
+/* 段落 */
+.theme-reco-content p
+  color #c9d1d9 !important
+  margin-top 0.5rem !important
+  margin-bottom 0.5rem !important
+
+.theme-reco-content p:first-child
+  margin-top 0 !important
+
+.theme-reco-content p:last-child
+  margin-bottom 0 !important
+
+.theme-reco-content p + h2,
+.theme-reco-content p + h3
+  margin-top 1.5rem !important
+
+/* 链接 */
+.theme-reco-content a
+  color #58a6ff !important
+  text-decoration none !important
+  border-bottom 1px dotted #58a6ff
+
+.theme-reco-content a:hover
+  border-bottom-style solid
+
+/* 行内代码 */
+.theme-reco-content code
+  background #161b22 !important
+  color #ff7b72 !important
+  padding 0.2rem 0.4rem
+  border-radius 3px
+  font-size 0.9em
+
+/* 代码块 */
+.theme-reco-content pre
+  background #161b22 !important
+  border 1px solid #30363d !important
+  border-radius 6px
+  padding 1rem
+  margin-bottom 1.5rem
+
+.theme-reco-content pre code
+  background transparent !important
+  color #c9d1d9 !important
+  padding 0
+  border none
+
+/* 引用块 */
+.theme-reco-content blockquote
+  border-left 3px solid #58a6ff !important
+  background #161b22 !important
+  color #8b949e !important
+  padding 1rem 1.5rem
+  margin 1.5rem 0
+  border-radius 4px
+
+/* 列表 */
+.theme-reco-content ul,
+.theme-reco-content ol
+  color #c9d1d9 !important
+  padding-left 2rem
+
+.theme-reco-content li
+  color #c9d1d9 !important
+  margin-bottom 0.2rem
+
+.theme-reco-content li::marker
+  color #58a6ff
+
+/* 表格 */
+.theme-reco-content table
+  width 100%
+  margin 1.5rem 0
+  border-collapse collapse
+
+.theme-reco-content th,
+.theme-reco-content td
+  border 1px solid #30363d !important
+  padding 0.75rem 1rem
+  color #c9d1d9 !important
+
+.theme-reco-content th
+  background #161b22 !important
+  color #58a6ff !important
+  font-weight 600
+
+.theme-reco-content tr:hover
+  background #161b22 !important
+
+/* 图片 */
+.theme-reco-content img
+  max-width 100%
+  border-radius 6px
+  border 1px solid #30363d
+  margin 1.5rem 0
+
+/* 分隔线 */
+.theme-reco-content hr
+  border none
+  border-top 1px dashed #30363d !important
+  margin 2rem 0
+
+/* 侧边栏 */
+.sidebar
+  background #0d1117 !important
+  border-right 1px solid #30363d !important
+
+.sidebar .sidebar-sub-headers a
+  color #8b949e !important
+  font-size 0.85rem
+
+.sidebar .sidebar-sub-headers a:hover
+  color #58a6ff !important
+
+.sidebar .sidebar-sub-headers a.active
+  color #58a6ff !important
+  border-left-color #58a6ff !important
+
+/* 导航栏 */
+.navbar
+  background #0d1117 !important
+  border-bottom 1px solid #30363d !important
+
+.navbar .links
+  background #0d1117 !important
+
+.navbar .site-name
+  color #58a6ff !important
+
+.navbar .nav-item .nav-link
+  color #8b949e !important
+
+.navbar .nav-item .nav-link:hover,
+.navbar .nav-item .nav-link.active
+  color #58a6ff !important
+
+/* 分页导航 */
+.pagination
+  color #8b949e !important
+
+.pagination a
+  color #58a6ff !important
+
+/* 隐藏原有装饰元素 */
+.page-edit-link,
+.page-nav
+  color #8b949e !important
+
+.page-nav a
+  color #58a6ff !important
