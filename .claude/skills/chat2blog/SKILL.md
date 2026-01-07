@@ -20,6 +20,8 @@ description: 将 AI 聊天记录、对话内容转换为 VuePress 格式的技�
 ---
 title: 文章标题
 date: YYYY-MM-DD
+tags:
+- ai-generation
 ---
 
 # 文章标题

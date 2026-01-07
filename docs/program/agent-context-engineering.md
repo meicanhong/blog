@@ -1,6 +1,8 @@
 ---
 title: AI Agent 上下文工程实践：从长任务崩溃到稳定运行
 date: 2025-11-24
+tags:
+- ai-generation
 ---
 
 # AI Agent 上下文工程实践：从长任务崩溃到稳定运行

@@ -1,6 +1,8 @@
 ---
 title: AutoGen Human-in-the-Loop 实践：从暂停机制到前后端通讯
 date: 2025-11-09
+tags:
+- ai-generation
 ---
 
 # AutoGen Human-in-the-Loop 实践：从暂停机制到前后端通讯
