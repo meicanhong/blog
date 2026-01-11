@@ -1,6 +1,6 @@
 ---
 title: MCP Tool Proxy - 我如何在代理层解决上下文爆炸问题
-date: 2025-01-11
+date: 2025-11-27
 ---
 
 # MCP Tool Proxy - 我如何在代理层解决上下文爆炸问题
