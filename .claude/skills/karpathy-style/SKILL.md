@@ -15,7 +15,7 @@ description: 模仿 Andrej Karpathy 的写作风格重写技术博客。当用�
    - 大量括号补充说明
    - 物理直觉和类比
    - 渐进式复杂度
-4. 输出重写后的 Markdown 文章
+4. 输出重写后的 Markdown 中文文章
 
 ## 风格核心
 
