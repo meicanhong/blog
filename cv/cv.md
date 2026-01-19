@@ -20,15 +20,14 @@ title: 简历
 
 **Agent工程师　2025.03 – 2025.09**
 
-
-- 负责后端的对话功能，agent/workflow 配置管理，mutil-trigger,版本快照，用户管理，runtime 数据持久化，定时任务，日志监控等基础功能
-- 设计并实现 AI Agent 的 Human-in-the-Loop 工作流，实现实时人工干预、反馈驱动模型优化及高风险任务审计。
-- 设计Domain Knowledge 注入机制（类似现在的 Claude Skills），domain knowledge 被设计为标准 MCP Tool 格式，agents 在初始化阶段会去动态扫描 domain tool，自行决定是否使用，若使用则会将 domain knowledge 注入到全局 prompt 中，后续 runtime 会依照 domain knowledge 行动。
-- 研发企业级 MCP Marketplace 平台，可以一键收录外部符合 Openapi/MCP 格式的服务，转换为标准的 MCP 格式并部署到 k8s 集群中，部署上线后 agent 即可discover这些 tool 并准确使用；对于需要 api key 的 mcp servers，平台可在 tool 运行前问用户索要 api key，或者使用平台提供好的 api key。
-- 实现 Tool Indexing 模块，利用 LLM 与原始 Tool Info，去重新生成更好的 Tool Info，例如统一的 Tool Name/ Description/ args description 等元数据，还会生成多条这个 tool 的使用场景，什么时候使用，什么时候不该使用，最终把这些数据信息 embedding 进 qdrant 中，等待 tool selector 模块使用。
-- 实现 Tool Selector 模块，运用 Mutil-Query + Parent Doucment 三路 RAG 向量检索, 能根据用户意图从 1000+ Tools 中挑选合适的 Tool 来满足用户意图，从 Qdrant 中匹配出来的 tools 会经过一轮 llm rerank(根据 tool calls count/ tool score 等)，最终匹配最合适的 Tool 返回给 agent 使用。
-- 设计并实现 Browser Crawler Plugin，Agent 以 MCP 标准来调用这个 Plugin，Plugin 内置了主流平台的爬虫模板(etc: X、Reddit、小红书), 这些爬虫模块以 MCP Tool 格式呈现给 Agent，若没匹配到合适的爬虫模板，Agent 可以按 browser-use 方式通过 plugin 操作浏览器, 去获取目标数据
-- 设计并实现 Google Sheet MCP，支持 Sheet 基础数据操作，DataFrame/SQL-like 分析、公式注入与图表生成，并通过 dry_run + diff + commit 机制保障 AI 自动化操作的安全可控。
+- 负责 AI Agent 后端核心功能，涵盖对话管理、workflow 配置、多触发机制、用户管理及 runtime 数据持久化，使用 FastAPI 和自研AI框架，保障平台稳定运行。
+- 设计并实现 Human-in-the-Loop ，实现实时人工干预、反馈驱动模型优化及高风险任务审计，结合 LLM API 集成 提升决策可靠性。
+- 设计并实现  Domain Knowledge 注入机制，将领域知识封装为标准 MCP Tool，并通过 Prompt Engineering 动态注入到全局 Prompt，使 Agents 可智能决策。
+- 研发企业级 MCP Marketplace 平台，实现外部 OpenAPI/MCP 服务一键收录、标准化转换及 Kubernetes/Docker 部署，提升 Agent 可扩展性和工具发现效率。
+- 开发 Tool Selector 与 Tool Indexing 模块，基于 Qdrant 向量数据库、RAG、HyDE、Multi-Query 检索 和 LLM rerank，从 1000+ Tools 中智能匹配最优 Tool，提升 Agent 决策准确率。
+- 设计并实现基于用户上传知识库的 RAG 问答功能，采用 Multi‑Head RAG 与 Corrective RAG 机制，通过 Qdrant 向量检索和 LLM 生成高质量回答，提升 Agent 对自定义知识的响应能力与答案准确性。
+- 设计 Browser Crawler Chrome 插件，通过 MCP Tool Call 提供模板化爬虫与 Agent 自主浏览器操作两种方式，实现多平台数据采集并增强 Agent 信息获取能力。
+- 构建 Google Sheet MCP，支持 Pandas/DataFrame、SQL-like 分析、公式与图表生成，内置 dry_run 安全机制保障 AI 自动化操作可靠性。
 
 ### KOL.AI (X 社媒内容创作平台)
 
