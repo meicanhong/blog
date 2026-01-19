@@ -16,26 +16,28 @@ title: 简历
 
 ## 项目经历
 
-### MaybeAI（Agentic Workflow 平台）
+### MaybeAI（Agentic 平台）
 
 **Agent工程师　2025.03 – 2025.09**
 
-- 设计并实现自然语言生成生产级 Workflow 核心能力**从 0 到 1**：用户一句自然语言描述，系统自动完成意图解析 → 多 Agent 规划 → Tool 链编排 → 可视化 Workflow 固化，平均 **9 秒生成、21 秒首次运行**，Workflow 成功生成率超 **96%**
-- 设计并实现**图形化 Workflow 编辑器**：支持节点拖拽编辑（LLM 模型、Prompt、工具参数、分支逻辑等）、实时预览与版本对比，显著提升企业用户定制与迭代效率
-- 实现**"冷启动 + 固化执行"双模引擎**：首次由 LLM 完成规划，生成后自动切换为硬编码稳定执行（完全脱 LLM），仅在异常场景介入，单 Workflow 日均 token 消耗降低 **90%+**，大幅降低平台大模型成本
-- 构建**长任务 Agent 上下文工程体系**（文件系统外部记忆 + 可逆压缩 + 追加式行动-观察历史 + 复述目标），支持 **50+ 步复杂任务无目标漂移**，提升跨月趋势分析与深度报告自动化稳定性
-- 落地**全链路可观测与一键回放系统**（Redis + Elasticsearch checkpoint）：支持每步 reasoning chain、tool call 与 token 消耗可视化回放，异常 **30 秒告警**，故障定位时间降至 **3 分钟内**
-- 研发**企业级 MCP Tool 平台**：支持 OpenAPI 3.0 接口 **8 秒自动转化**及 MCP 标准 Tool 一键收录，实现可检索/灰度/观测/审计全能力；结合 HyDE + Multi-Query + Parent Document 三路向量检索优化，已聚合 **1000+ 企业级 Tool**，日调用峰值 **10 万次**，成功率 **99.2%**
-- 负责 **MCP Tool 质量提升与标准化**，构建统一 Tool Info 引擎自动生成 Tool Name/Description/Args Description 等元信息，通过标准化 Tool Info 将 Tool Selector 准确率提升至 **95%**，LLM Function Call 准确率达 **99%**
-- 设计并实现基于用户浏览器侧的 **Browser Plugin（MCP Tool）**，支持 Agent 在 Workflow 中以自然语言调度用户浏览能力获取实时数据，并将 Tool Output 注入后续流程，解决登录态与权限受限场景下的数据接入问题
+
+- 负责后端的对话功能，agent/workflow 配置管理，mutil-trigger,版本快照，用户管理，runtime 数据持久化，定时任务，日志监控等基础功能
+- 设计并实现 AI Agent 的 Human-in-the-Loop 工作流，实现实时人工干预、反馈驱动模型优化及高风险任务审计。
+- 设计Domain Knowledge 注入机制（类似现在的 Claude Skills），domain knowledge 被设计为标准 MCP Tool 格式，agents 在初始化阶段会去动态扫描 domain tool，自行决定是否使用，若使用则会将 domain knowledge 注入到全局 prompt 中，后续 runtime 会依照 domain knowledge 行动。
+- 研发企业级 MCP Marketplace 平台，可以一键收录外部符合 Openapi/MCP 格式的服务，转换为标准的 MCP 格式并部署到 k8s 集群中，部署上线后 agent 即可discover这些 tool 并准确使用；对于需要 api key 的 mcp servers，平台可在 tool 运行前问用户索要 api key，或者使用平台提供好的 api key。
+- 实现 Tool Indexing 模块，利用 LLM 与原始 Tool Info，去重新生成更好的 Tool Info，例如统一的 Tool Name/ Description/ args description 等元数据，还会生成多条这个 tool 的使用场景，什么时候使用，什么时候不该使用，最终把这些数据信息 embedding 进 qdrant 中，等待 tool selector 模块使用。
+- 实现 Tool Selector 模块，运用 Mutil-Query + Parent Doucment 三路 RAG 向量检索, 能根据用户意图从 1000+ Tools 中挑选合适的 Tool 来满足用户意图，从 Qdrant 中匹配出来的 tools 会经过一轮 llm rerank(根据 tool calls count/ tool score 等)，最终匹配最合适的 Tool 返回给 agent 使用。
+- 设计并实现 Browser Crawler Plugin，Agent 以 MCP 标准来调用这个 Plugin，Plugin 内置了主流平台的爬虫模板(etc: X、Reddit、小红书), 这些爬虫模块以 MCP Tool 格式呈现给 Agent，若没匹配到合适的爬虫模板，Agent 可以按 browser-use 方式通过 plugin 操作浏览器, 去获取目标数据
+- 设计并实现 Google Sheet MCP，支持 Sheet 基础数据操作，DataFrame/SQL-like 分析、公式注入与图表生成，并通过 dry_run + diff + commit 机制保障 AI 自动化操作的安全可控。
 
 ### KOL.AI (X 社媒内容创作平台)
 
 **全栈工程师　2024.08 - 2025.03**
 
-- 基于 AutoGen 框架设计并实现 Agent 智能体管理系统，支持 Agent 的创建、编辑、复制、删除及历史版本回溯；提供 14+ 工具插件（互联网搜索、图片生成、新闻抓取等）与多模型配置，实现 Agent 配置的可视化低代码管理
-- 设计并实现爆款推文库与内容灵感系统，构建并维护 300万+ 爆款推文数据库；支持关键词/@handle 高级搜索、过滤与个性化推荐，实现 AI 驱动的伪原创重写与线程生成，帮助用户 在 1 小时内批量产出 100+ 高质量推文/线程，显著提升内容创作效率
-- 设计并实现专属 X AI 写作引擎，基于大语言模型构建个性化内容生成系统，支持每日定制化推文建议、钩子生成、风格模仿；结合病毒库数据训练模型，实现从灵感采集到自动化重写的全链路，支持用户 快速仿写爆款并保持原创性，助力数千创作者月涨数千粉丝
+- 基于 AutoGen 框架设计并实现 Mutil Agent 写作系统，支持 Agent 的创建、编辑、复制、删除及历史版本回溯；提供 14+ 工具插件（互联网搜索、图片生成、新闻抓取等）与多模型配置，实现 Agent 配置的可视化低代码管理
+- 设计并实现 X AI 写作引擎，用户可设置人设，写作风格，受众群体等信息，支持一键复制 X KOL 生成专属的配置信息，自动搜索今日热门话题去生成个性化推文
+- 设计并实现 写作灵感引擎，用户可设置监听多个 X KOL和新闻数据源，系统会自动分析，生成每日推文建议
+- 设计并实现 RLHF 反馈引擎，可针对 AI 生成的推文进行意见反馈，系统会收集保存反馈，
 - 设计并实现 AI 任务执行日志可视化系统，支持实时查看 Agent 每步执行明细与生成的中间内容；追踪模型调用、Token 消耗、执行耗时等关键指标，并提供 Agent 配置快照，实现 AI 生成过程的全链路可追溯与高效调试
 - 设计并实现 Twitter 账号全生命周期管理系统，覆盖账号管理、AI 驱动内容生成、定时发布、自动评论、自动关注、安全风控，支持多账号批量运营与任务状态实时监控
 - 设计并实现多源热点数据爬取系统，每日定时抓取 X 热门话题、Google Trends、Medium 热门文章等多平台数据，通过统一数据清洗与聚合管道为 AI 内容创作提供实时灵感素材
