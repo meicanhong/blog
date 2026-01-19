@@ -29,7 +29,7 @@ title: 简历
 - 设计 Browser Crawler Chrome 插件，通过 MCP Tool Call 提供模板化爬虫与 Agent 自主浏览器操作两种方式，实现多平台数据采集并增强 Agent 信息获取能力。
 - 构建 Google Sheet MCP，支持 Pandas/DataFrame、SQL-like 分析、公式与图表生成，内置 dry_run 安全机制保障 AI 自动化操作可靠性。
 
-### KOL.AI (X 社媒内容创作平台)
+### KOL.AI (X AI创作平台)
 
 **全栈工程师　2024.08 - 2025.03**
 
@@ -42,7 +42,7 @@ title: 简历
 - 实现 多源热点数据爬取系统，每日抓取 X 热门话题、Google Trends、Medium 热文等，统一清洗聚合为 AI 内容创作提供灵感素材。
 
 
-### Ads3（Web3 智能广告平台）
+### Ads3（Web3 任务激励平台）
 
 **后端工程师　2023.10 – 2024.08**
 
