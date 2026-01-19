@@ -166,8 +166,11 @@
             <div class="info-item"><span class="info-label">性别：</span>男</div>
             <div class="info-item"><span class="info-label">年龄：</span>25</div>
             <div class="info-item"><span class="info-label">学历：</span>本科</div>
+            <div class="info-item"><span class="info-label">专业：</span>网络工程</div>
             <div class="info-item"><span class="info-label">电话：</span>13059277414</div>
             <div class="info-item"><span class="info-label">邮箱：</span>canhong5357003@gmail.com</div>
+            <div class="info-item"><span class="info-label">GitHub：</span><a href="https://github.com/meicanhong"
+                    style="color: #0066cc; text-decoration: none;">github.com/meicanhong</a></div>
             <div class="info-item"><span class="info-label">博客：</span><a href="https://meicanhong.github.io"
                     style="color: #0066cc; text-decoration: none;">meicanhong.github.io</a></div>
         </div>
@@ -175,30 +178,36 @@
         <h2>项目经历</h2>
 
         <div class="project-header">
-            <div class="project-title">MaybeAI（Agentic Workflow 平台）</div>
-            <div class="project-role">Agent工程师　2024.08 – 2025.09</div>
+            <div class="project-title">MaybeAI（Agentic 平台）</div>
+            <div class="project-role">Agent工程师　2025.03 – 2025.09</div>
         </div>
         <ul>
-            <li>设计并实现自然语言生成生产级 Workflow 核心能力<strong>从 0 到 1</strong>：用户一句自然语言描述，系统自动完成意图解析 → 多 Agent 规划 → Tool 链编排 → 可视化
-                Workflow 固化，平均 <strong>9 秒生成、21 秒首次运行</strong>，Workflow 成功生成率超 <strong>96%</strong> </li>
-            <li>设计并实现<strong>图形化 Workflow 编辑器</strong>：支持节点拖拽编辑（LLM 模型、Prompt、工具参数、分支逻辑等）、实时预览与版本对比，显著提升企业用户定制与迭代效率。
-            </li>
-            <li>实现<strong>"冷启动 + 固化执行"双模引擎</strong>：首次由 LLM 完成规划，生成后自动切换为硬编码稳定执行（完全脱 LLM），仅在异常场景介入，单 Workflow 日均 token
-                消耗降低 <strong>90%+</strong>，大幅降低平台大模型成本。</li>
-            <li>构建<strong>长任务 Agent 上下文工程体系</strong>（文件系统外部记忆 + 可逆压缩 + 追加式行动-观察历史 + 复述目标），支持 <strong>50+
-                    步复杂任务无目标漂移</strong>，提升跨月趋势分析与深度报告自动化稳定性。</li>
-            <li>落地<strong>全链路可观测与一键回放系统</strong>（Redis + Elasticsearch checkpoint）：支持每步 reasoning chain、tool call 与
-                token 消耗可视化回放，异常 <strong>30 秒告警</strong>，故障定位时间降至 <strong>3 分钟内</strong>。</li>
-            <li>研发<strong>企业级 MCP Tool 平台</strong>：支持 OpenAPI 3.0 接口 <strong>8 秒自动转化</strong>及 MCP 标准 Tool
-                一键收录，实现可检索/灰度/观测/审计全能力；结合 HyDE + Multi-Query + Parent Document 三路向量检索优化，已聚合 <strong>1000+ 企业级
-                    Tool</strong>，日调用峰值 <strong>10 万次</strong>，成功率 <strong>99.2%</strong>。</li>
-            <li>负责 <strong>MCP Tool 质量提升与标准化</strong>，构建统一 Tool Info 引擎自动生成 Tool Name/Description/Args Description 等元信息，通过标准化 Tool Info 将 Tool Selector 准确率提升至 <strong>95%</strong>，LLM Function Call 准确率达 <strong>99%</strong></li>
-            <li>设计并实现基于用户浏览器侧的 <strong>Browser Plugin（MCP Tool）</strong>，支持 Agent 在 Workflow 中以自然语言调度用户浏览能力获取实时数据，并将
-                Tool Output 注入后续流程，解决登录态与权限受限场景下的数据接入问题。</li>
+            <li>负责 AI Agent 后端核心功能，涵盖对话管理、workflow 配置、多触发机制、用户管理及 runtime 数据持久化，使用 FastAPI 和自研AI框架，保障平台稳定运行。</li>
+            <li>设计并实现 Human-in-the-Loop，实现实时人工干预、反馈驱动模型优化及高风险任务审计，结合 LLM API 集成提升决策可靠性。</li>
+            <li>设计并实现 Domain Knowledge 注入机制，将领域知识封装为标准 MCP Tool，并通过 Prompt Engineering 动态注入到全局 Prompt，使 Agents 可智能决策。</li>
+            <li>研发企业级 MCP Marketplace 平台，实现外部 OpenAPI/MCP 服务一键收录、标准化转换及 Kubernetes/Docker 部署，提升 Agent 可扩展性和工具发现效率。</li>
+            <li>开发 Tool Selector 与 Tool Indexing 模块，基于 Qdrant 向量数据库、RAG、HyDE、Multi-Query 检索和 LLM rerank，从 1000+ Tools 中智能匹配最优 Tool，提升 Agent 决策准确率。</li>
+            <li>设计并实现基于用户上传知识库的 RAG 问答功能，采用 Multi‑Head RAG 与 Corrective RAG 机制，通过 Qdrant 向量检索和 LLM 生成高质量回答，提升 Agent 对自定义知识的响应能力与答案准确性。</li>
+            <li>设计 Browser Crawler Chrome 插件，通过 MCP Tool Call 提供模板化爬虫与 Agent 自主浏览器操作两种方式，实现多平台数据采集并增强 Agent 信息获取能力。</li>
+            <li>构建 Google Sheet MCP，支持 Pandas/DataFrame、SQL-like 分析、公式与图表生成，内置 dry_run 安全机制保障 AI 自动化操作可靠性。</li>
+        </ul>
+
+        <div class="project-header">
+            <div class="project-title">KOL.AI (X AI创作平台)</div>
+            <div class="project-role">全栈工程师　2024.08 - 2025.03</div>
+        </div>
+        <ul>
+            <li>基于 AutoGen 框架设计并实现多 Agent 写作系统，支持 Agent 创建、编辑、版本回溯及 14+ 工具插件管理，实现低代码可视化配置。</li>
+            <li>设计并实现 X AI 写作引擎，支持用户自定义人设、写作风格及受众群体，可一键 fork 推特博主风格生成个性化推文，并基于用户知识库、Prompt 和历史推文生成定制化内容，同时自动抓取热门话题提升相关性。</li>
+            <li>构建写作灵感引擎，实时监听多个 X KOL 与新闻数据源，自动分析并生成每日推文建议，提升内容创作效率。</li>
+            <li>设计 RLHF 反馈引擎，收集用户对 AI 生成推文的意见，用于持续优化生成效果。</li>
+            <li>实现 AI 任务执行日志可视化系统，支持实时追踪模型调用、Token 消耗、执行耗时及中间内容，实现全链路可追溯与高效调试。</li>
+            <li>构建 Twitter 账号全生命周期管理系统，覆盖账号管理、AI 内容生成、定时发布、自动评论/关注及安全风控，支持多账号批量运营。</li>
+            <li>实现多源热点数据爬取系统，每日抓取 X 热门话题、Google Trends、Medium 热文等，统一清洗聚合为 AI 内容创作提供灵感素材。</li>
         </ul> 
 
         <div class="project-header">
-            <div class="project-title">Ads3（Web3 智能广告平台）</div>
+            <div class="project-title">Ads3（Web3 任务激励平台）</div>
             <div class="project-role">后端工程师　2023.10 – 2024.08</div>
         </div>
         <ul>
