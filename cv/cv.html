@@ -14,12 +14,12 @@
 
         @page {
             size: A4;
-            margin: 0;
+            margin: 10mm 0;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
-            line-height: 1.6;
+            line-height: 1.5;
             color: #333;
             background: #fff;
         }
@@ -27,44 +27,44 @@
         .container {
             width: 210mm;
             min-height: 297mm;
-            padding: 15mm 18mm;
+            padding: 5mm 15mm;
             margin: 0 auto;
             background: white;
         }
 
         h1 {
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #000;
-            border-bottom: 3px solid #000;
-            padding-bottom: 8px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 6px;
         }
 
         h2 {
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 700;
-            margin-top: 20px;
-            margin-bottom: 12px;
+            margin-top: 16px;
+            margin-bottom: 10px;
             color: #000;
-            border-left: 4px solid #000;
-            padding-left: 10px;
+            border-left: 3px solid #000;
+            padding-left: 8px;
         }
 
         h3 {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 600;
-            margin-top: 14px;
-            margin-bottom: 8px;
+            margin-top: 10px;
+            margin-bottom: 6px;
             color: #222;
         }
 
         .info-list {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2px 15px;
-            margin-bottom: 4px;
-            font-size: 13px;
+            gap: 2px 12px;
+            margin-bottom: 3px;
+            font-size: 11px;
         }
 
         .info-item {
@@ -81,8 +81,8 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 4px;
-            font-size: 14px;
+            margin-bottom: 3px;
+            font-size: 11px;
         }
 
         .company-name {
@@ -92,41 +92,41 @@
 
         .company-period {
             color: #666;
-            font-size: 13px;
+            font-size: 11px;
         }
 
         .project-header {
-            margin-top: 14px;
-            margin-bottom: 4px;
+            margin-top: 10px;
+            margin-bottom: 3px;
         }
 
         .project-title {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 700;
             color: #000;
         }
 
         .project-role {
-            font-size: 13px;
+            font-size: 11px;
             color: #666;
             margin-top: 2px;
         }
 
         ul {
-            margin-left: 18px;
-            margin-top: 8px;
+            margin-left: 16px;
+            margin-top: 6px;
         }
 
         li {
-            font-size: 13px;
-            line-height: 1.7;
-            margin-bottom: 6px;
+            font-size: 11px;
+            line-height: 1.55;
+            margin-bottom: 4px;
             color: #333;
         }
 
         .tech-stack {
-            font-size: 13px;
-            line-height: 1.8;
+            font-size: 11px;
+            line-height: 1.7;
         }
 
         .tech-item {
@@ -139,7 +139,7 @@
         }
 
         .education-info {
-            font-size: 14px;
+            font-size: 11px;
             color: #333;
         }
 
@@ -151,7 +151,7 @@
 
             .container {
                 margin: 0;
-                padding: 15mm 18mm;
+                padding: 5mm 15mm;
             }
         }
     </style>
@@ -182,14 +182,15 @@
             <div class="project-role">Agent工程师　2025.03 – 2025.09</div>
         </div>
         <ul>
-            <li>负责 AI Agent 后端核心功能，涵盖对话管理、workflow 配置、多触发机制、用户管理及 runtime 数据持久化，使用 FastAPI 和自研AI框架，保障平台稳定运行。</li>
-            <li>设计并实现 Human-in-the-Loop，实现实时人工干预、反馈驱动模型优化及高风险任务审计，结合 LLM API 集成提升决策可靠性。</li>
-            <li>设计并实现 Domain Knowledge 注入机制，将领域知识封装为标准 MCP Tool，并通过 Prompt Engineering 动态注入到全局 Prompt，使 Agents 可智能决策。</li>
-            <li>研发企业级 MCP Marketplace 平台，实现外部 OpenAPI/MCP 服务一键收录、标准化转换及 Kubernetes/Docker 部署，提升 Agent 可扩展性和工具发现效率。</li>
-            <li>开发 Tool Selector 与 Tool Indexing 模块，基于 Qdrant 向量数据库、RAG、HyDE、Multi-Query 检索和 LLM rerank，从 1000+ Tools 中智能匹配最优 Tool，提升 Agent 决策准确率。</li>
-            <li>设计并实现基于用户上传知识库的 RAG 问答功能，采用 Multi‑Head RAG 与 Corrective RAG 机制，通过 Qdrant 向量检索和 LLM 生成高质量回答，提升 Agent 对自定义知识的响应能力与答案准确性。</li>
-            <li>设计 Browser Crawler Chrome 插件，通过 MCP Tool Call 提供模板化爬虫与 Agent 自主浏览器操作两种方式，实现多平台数据采集并增强 Agent 信息获取能力。</li>
-            <li>构建 Google Sheet MCP，支持 Pandas/DataFrame、SQL-like 分析、公式与图表生成，内置 dry_run 安全机制保障 AI 自动化操作可靠性。</li>
+            <li>构建 AI Agent 平台核心后端体系，负责 Agent 管理、Workflow 编排、用户体系，保证 对话连接稳定性，并实现 Agent 与 Workflow 执行结果存储，支持用户查看运行过程；支持 API 与 Scheduler 触发 Agent/Workflow，基于 FastAPI + 自研 Agent Framework 支撑多 Agent 并发执行与稳定运行。</li>
+            <li>设计并落地 Hybrid Search RAG 架构，支持 PDF / Excel / Web 等多源数据解析与 OCR 入库，基于 Qdrant + Dense + BM25 + ColBERT 构建多阶段召回与重排，在复杂查询场景下显著提升命中率与响应性能。</li>
+            <li>设计并实现 Skills 能力系统，构建 Skill Registry 与 Router 组件，将领域 Prompt 与操作逻辑模块化沉淀，并可动态注入领域知识至 Agent；Workflow 在 Planner 阶段可读取 Skills 生成操作节点与依赖流，实现 Agent 能力的自动发现、组合执行与复用。</li>
+            <li>搭建企业级 MCP Marketplace，实现外部 OpenAPI / MCP 服务一键接入、标准化转换与 Kubernetes Pod 化部署，提升 Agent 扩展能力与工具发现效率。</li>
+            <li>实现 外部 MCP 标准化与增强功能，在收录外部 MCP 时使用 AI 自动重写 Tool Info，将非结构化描述转为统一格式（包含功能说明、适用场景、注意事项及参数示例），显著提升 Agent 工具检索与调用的准确率和成功率。</li>
+            <li>研发 Tool Registry & Router 组件，基于 Qdrant 向量检索 + HyDE + Multi-Query + LLM Rerank，在 1000+ Tools 中自动匹配最优工具组合，提升 Agent 决策准确率与 Tool Call 成功率。</li>
+            <li>设计 Human-in-the-Loop 控制体系，支持任务暂停、人工编辑、审批确认与恢复执行，用于高风险操作与质量校验，使自动化 Agent 能安全应用于生产级业务流程。</li>
+            <li>设计并实现 Agent-to-Browser 执行通道，基于 MCP Tool Call + Chrome Extension 驱动真实浏览器行为，支持自动交互与结构化采集，解决传统爬虫在 社媒平台、反爬环境与登录态数据 场景下的可用性问题。</li>
+            <li>构建 AI Sheets MCP 执行层，通过 MCP 封装 Google Sheets API，支持 Agent 批量读取与更新数据，并提供 AI 数据增强、公式生成与图表生成的能力，并支持将 Agent 处理结果导出至 Google Sheet，实现更灵活的数据存储与使用。</li>
         </ul>
 
         <div class="project-header">
@@ -198,37 +199,46 @@
         </div>
         <ul>
             <li>基于 AutoGen 框架设计并实现多 Agent 写作系统，支持 Agent 创建、编辑、版本回溯及 14+ 工具插件管理，实现低代码可视化配置。</li>
-            <li>设计并实现 X AI 写作引擎，支持用户自定义人设、写作风格及受众群体，可一键 fork 推特博主风格生成个性化推文，并基于用户知识库、Prompt 和历史推文生成定制化内容，同时自动抓取热门话题提升相关性。</li>
-            <li>构建写作灵感引擎，实时监听多个 X KOL 与新闻数据源，自动分析并生成每日推文建议，提升内容创作效率。</li>
-            <li>设计 RLHF 反馈引擎，收集用户对 AI 生成推文的意见，用于持续优化生成效果。</li>
+            <li>构建 Trends、Web Search、News、Tweets、Memory 等 MCP 工具，为 AutoGen 多 Agent 写作系统提供稳定可靠的运行时能力，提升内容生成效率与系统稳定性。</li>
+            <li>实现 一键 Fork KOL 功能，用户输入 X username 后，自动创建对应人设、写作风格及选题偏好，自动配置所需 MCP
+                工具，并抓取目标用户历史推文，将爆款内容转化为写作模板，使用户可快速生成模仿该 KOL 风格的高质量推文。</li>
+            <li>构建 自动养号与互动系统，支持 Agent 自动关注同领域 KOL，实时监听目标 KOL 新推文并快速生成评论，同时可每日自动发布推文，帮助用户获取流量并提升账号活跃度。</li>
+            <li>使用 Mem0 构建记忆引擎，记录用户历史推文主题与内容，支持多 Agent 查询历史记忆，避免重复选题并提升内容多样性与创作效率。</li>
             <li>实现 AI 任务执行日志可视化系统，支持实时追踪模型调用、Token 消耗、执行耗时及中间内容，实现全链路可追溯与高效调试。</li>
-            <li>构建 Twitter 账号全生命周期管理系统，覆盖账号管理、AI 内容生成、定时发布、自动评论/关注及安全风控，支持多账号批量运营。</li>
-            <li>实现多源热点数据爬取系统，每日抓取 X 热门话题、Google Trends、Medium 热文等，统一清洗聚合为 AI 内容创作提供灵感素材。</li>
-        </ul> 
+            <li>实现 多源热点数据爬取系统，每日抓取 X 热门话题、Google Trends、Medium 热文等，统一清洗聚合为 AI 内容创作提供灵感素材。</li>
+        </ul>
 
         <div class="project-header">
             <div class="project-title">Ads3（Web3 任务激励平台）</div>
             <div class="project-role">后端工程师　2023.10 – 2024.08</div>
         </div>
         <ul>
-            <li>设计并实现<strong>核心活动引擎与任务系统</strong>，构建统一事件驱动架构支持概率抽奖、拼团、定时开奖、裂变任务、俄罗斯转盘等 <strong>8+ 活动玩法</strong>；实现 Telegram 群验证、发言检测、邀请链追踪、链上行为验证等 <strong>20+ 任务类型</strong>，支撑平台 <strong>3 个月从 0 增长至 100 万用户</strong>，日活峰值 <strong>15 万+</strong></li>
-            <li>设计并实现<strong>跨链钱包充值提现系统</strong>，构建统一抽象层支持 TON 与 <strong>10+ 主流 EVM 链</strong>（Ethereum、BSC、Polygon 等）；通过链上事件监听 + 区块确认机制实现自动到账，充提时效 <strong>< 3 分钟</strong>，交易成功率 <strong>99.8%</strong></li>
-            <li>设计并实现 <strong>AI 智能客服 SaaS 平台</strong>，基于 RAG + LLM 构建多租户 Telegram Bot 系统，支持品牌方上传项目知识库、自定义回复风格与话术模板、可视化配置工具开关（联网搜索、实时新闻等）；通过向量检索 + 上下文记忆实现精准问答，并提供 Q&A 测试集验证知识库质量</li>
-            <li>设计并实现 <strong>AI 智能风控审核系统</strong>，基于用户行为图谱分析与资金流水模式识别，构建多维度异常检测模型；自动识别羊毛党团伙的异常提现行为，并及时告警通知运维人员</li>
-            <li>设计并实现运营后台（React + NestJS），实现活动一键创建/编辑/上下架、资金归集与分发、实时数据大屏等功能，将运营发活动时间<strong>从 2 小时缩短至 5 分钟</strong>，运营效率提升超 <strong>90%</strong></li>
+            <li>设计并实现核心活动引擎与任务系统，构建统一事件驱动架构支持概率抽奖、拼团、定时开奖、裂变任务、俄罗斯转盘等 8+ 活动玩法；实现 Telegram 群验证、发言检测、邀请链追踪、链上行为验证等 20+
+                任务类型，支撑平台 3 个月从 0 增长至 100 万用户，日活峰值 15 万+</li>
+            <li>设计并实现跨链钱包充值提现系统，构建统一抽象层支持 TON 与 5+ 主流 EVM 链（Ethereum、BSC、Polygon 等）；通过链上事件监听 + 区块确认机制实现自动到账，充提时效 < 3
+                    分钟，交易成功率 99.8%</li>
+            <li>设计并实现 AI 智能客服 SaaS 平台，基于 RAG + LLM 构建多租户 Telegram Bot
+                系统，支持品牌方上传项目知识库、自定义回复风格与话术模板、可视化配置工具开关（联网搜索、实时新闻等）；通过向量检索 + 上下文记忆实现精准问答，并提供 Q&A 测试集验证知识库质量</li>
+            <li>设计并实现 AI 智能风控审核系统，基于用户行为图谱分析与资金流水模式识别，构建多维度异常检测模型；自动识别羊毛党团伙的异常提现行为，并及时告警通知运维人员</li>
+            <li>设计并实现运营后台（React + NestJS），实现活动一键创建/编辑/上下架、资金归集与分发、实时数据大屏等功能，将运营发活动时间从 2 小时缩短至 5 分钟，运营效率提升超 90%</li>
         </ul>
 
-        <div class="project-header" style="padding-top: 60px;">
+        <div class="project-header">
             <div class="project-title">Footprint Analytics（链上数据分析平台）</div>
             <div class="project-role">区块链数据基础设施工程师　2022.09 – 2023.10</div>
         </div>
         <ul>
-            <li>负责大数据基础设施架构升级与性能优化，推动<strong>2 次架构迭代</strong>，最终构建 <strong>Trino + Iceberg + Doris + Flink</strong> 技术栈，支撑日均 <strong>10 万+ 次</strong> 跨链复杂分析查询；将查询时延 P95 <strong>从 3 分钟优化至 10 秒内</strong>，内部生产任务执行成功率提升至 <strong>99%</strong>，云服务成本降低 <strong>50%</strong></li>
-            <li>独立构建多链底层数据收录系统，实时收录 <strong>40+ EVM 与非 EVM 链</strong> 原始数据（Transactions、Logs、Blocks、Traces、Token Transfers），日处理 <strong>300GB+</strong> 链上数据，数据完整性及准确率达 99.99%。该系统已成功商业化，为多家头部 Web3 机构提供底层数据源支持。</li>
-            <li>为全球知名 GameFi 投资机构设计并交付实时分析系统，覆盖 DAU、NFT 铸造量等 15+ 核心指标；通过优化 Flink 流计算与向量化查询，实现秒级刷新（延迟 < 5s），支撑客户实时运营决策，并为公司带来数百万量级的年度商业价值。</li>
-            <li>主导大数据基础设施跨云迁移（GCP → 腾讯云），将 300TB+ 数据从 GCS 至 EMR HDFS 的零停机迁移。通过开发按分区并行同步、重构 Shuffle 逻辑、碎片文件合并等工具，将迁移效率提升 85%，实现每月 10 万美金级成本节省，保障数据 100% 完整性。</li>
+            <li>负责大数据基础设施架构升级与性能优化，推动2 次架构迭代，最终构建 Trino + Iceberg + Doris + Flink 技术栈，支撑日均 10 万+ 次 跨链复杂分析查询；将查询时延 P95 从
+                3 分钟优化至 10 秒内，内部生产任务执行成功率提升至 99%，云服务成本降低 50%</li>
+            <li>独立构建多链底层数据收录系统，实时收录 40+ EVM 与非 EVM 链 原始数据（Transactions、Logs、Blocks、Traces、Token Transfers），日处理 300GB+
+                链上数据，数据完整性及准确率达 99.99%。该系统已成功商业化，为多家头部 Web3 机构提供底层数据源支持。</li>
+            <li>为全球知名 GameFi 投资机构设计并交付实时分析系统，覆盖 DAU、NFT 铸造量等 15+ 核心指标；通过优化 Flink 流计算与向量化查询，实现秒级刷新（延迟 <
+                    5s），支撑客户实时运营决策，并为公司带来数百万量级的年度商业价值。</li>
+            <li>主导大数据基础设施跨云迁移（GCP → 腾讯云），将 300TB+ 数据从 GCS 至 EMR HDFS 的零停机迁移。通过开发按分区并行同步、重构 Shuffle 逻辑、碎片文件合并等工具，将迁移效率提升
+                85%，实现每月 10 万美金级成本节省，保障数据 100% 完整性。</li>
             <li>设计并实现覆盖 5,000+ 币种的高质量价格系统，时效性 < 5 分钟，准确率达金融级标准（99.99%）；该系统作为平台核心数据产品，广泛应用于行业头部 API 服务场景。</li>
-            <li>自然语言转 SQL（NL2SQL）系统：自主研发 NL2SQL 智能查询系统，支持用户通过自然语言生成复杂分析 SQL 并自动构建看板；系统 SQL 生成准确率达 90%，大幅降低了非技术用户的使用门槛，成为平台核心技术壁垒。</li>
+            <li>自然语言转 SQL（NL2SQL）系统：自主研发 NL2SQL 智能查询系统，支持用户通过自然语言生成复杂分析 SQL 并自动构建看板；系统 SQL 生成准确率达
+                90%，大幅降低了非技术用户的使用门槛，成为平台核心技术壁垒。</li>
         </ul>
 
         <h2>公司经历</h2>
@@ -244,18 +254,18 @@
         <div class="tech-stack">
             <div class="tech-item"><span class="tech-label">编程语言：</span>Python、Typescript、Java</div>
             <div class="tech-item"><span class="tech-label">大模型 & Agent：</span>Multi-Agent、Tool
-                Calling、ReAct、RAG、Context Engineering、Prompt Engineering</div>
+                Call、ReAct、RAG、Context Engineering、Prompt Engineering</div>
             <div class="tech-item"><span class="tech-label">大数据 &
                     基础设施：</span>Trino、Doris、Iceberg、Flink、Redis、Elasticsearch、MongoDB、MySQL、PostgreSQL</div>
             <div class="tech-item"><span class="tech-label">区块链：</span>EVM/非EVM 全链数据管道、智能合约交互、钱包系统</div>
             <div class="tech-item"><span class="tech-label">运维：</span>Linux、Docker、Kubernetes、Tencent Cloud/GCP</div>
         </div>
 
-        <h2>个人评价</h2>
+        <h2>个人优势</h2>
         <ul>
-            <li>拥有 3 年以上大语言模型（LLM）实战经验，熟悉 Vibe Coding，日常习惯使用 AI 自动化重复性任务与辅助脑力工作。</li>
-            <li>热衷技术创新，对新兴工具和前沿技术保持强烈好奇心和学习热情。</li>
-            <li>自驱力强，注重代码质量与产品体验，在 AI 时代追求高标准和良好品味。</li>
+            <li>具备多次从 0 到 1 的项目经验，进行多领域技术攻坚，曾负责 AI Agent，大数据，区块链等前沿领域的主力开发</li>
+            <li>拥有 3 年以上 LLM 实战经验，熟悉 Vibe Coding，日常习惯使用 AI 做分析决策和编码</li>
+            <li>热衷技术创新，对新兴工具和前沿技术保持强烈好奇心和学习热情</li>
         </ul>
     </div>
 </body>

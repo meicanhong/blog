@@ -20,25 +20,26 @@ title: 简历
 
 **Agent工程师　2025.03 – 2025.09**
 
-- 负责 AI Agent 后端核心功能，涵盖对话管理、workflow 配置、多触发机制、用户管理及 runtime 数据持久化，使用 FastAPI 和自研AI框架，保障平台稳定运行。
-- 设计并实现 Human-in-the-Loop ，实现实时人工干预、反馈驱动模型优化及高风险任务审计，结合 LLM API 集成 提升决策可靠性。
-- 设计并实现  Domain Knowledge 注入机制，将领域知识封装为标准 MCP Tool，并通过 Prompt Engineering 动态注入到全局 Prompt，使 Agents 可智能决策。
-- 研发企业级 MCP Marketplace 平台，实现外部 OpenAPI/MCP 服务一键收录、标准化转换及 Kubernetes/Docker 部署，提升 Agent 可扩展性和工具发现效率。
-- 开发 Tool Selector 与 Tool Indexing 模块，基于 Qdrant 向量数据库、RAG、HyDE、Multi-Query 检索 和 LLM rerank，从 1000+ Tools 中智能匹配最优 Tool，提升 Agent 决策准确率。
-- 设计并实现基于用户上传知识库的 RAG 问答功能，采用 Multi‑Head RAG 与 Corrective RAG 机制，通过 Qdrant 向量检索和 LLM 生成高质量回答，提升 Agent 对自定义知识的响应能力与答案准确性。
-- 设计 Browser Crawler Chrome 插件，通过 MCP Tool Call 提供模板化爬虫与 Agent 自主浏览器操作两种方式，实现多平台数据采集并增强 Agent 信息获取能力。
-- 构建 Google Sheet MCP，支持 Pandas/DataFrame、SQL-like 分析、公式与图表生成，内置 dry_run 安全机制保障 AI 自动化操作可靠性。
+- 构建 AI Agent 平台核心后端体系，负责 Agent 管理、Workflow 编排、用户体系，保证 对话连接稳定性，并实现 Agent 与 Workflow 执行结果存储，支持用户查看运行过程；支持 API 与 Scheduler 触发 Agent/Workflow，基于 FastAPI + 自研 Agent Framework 支撑多 Agent 并发执行与稳定运行。
+- 设计并落地 Hybrid Search RAG 架构，支持 PDF / Excel / Web 等多源数据解析与 OCR 入库，基于 Qdrant + Dense + BM25 + ColBERT 构建多阶段召回与重排，在复杂查询场景下显著提升命中率与响应性能。
+- 设计并实现 Skills 能力系统，构建 Skill Registry 与 Router 组件，将领域 Prompt 与操作逻辑模块化沉淀，并可动态注入领域知识至 Agent；Workflow 在 Planner 阶段可读取 Skills 生成操作节点与依赖流，实现 Agent 能力的自动发现、组合执行与复用。
+- 搭建企业级 MCP Marketplace，实现外部 OpenAPI / MCP 服务一键接入、标准化转换与 Kubernetes Pod 化部署，提升 Agent 扩展能力与工具发现效率。
+- 实现 外部 MCP 标准化与增强功能，在收录外部 MCP 时使用 AI 自动重写 Tool Info，将非结构化描述转为统一格式（包含功能说明、适用场景、注意事项及参数示例），显著提升 Agent 工具检索与调用的准确率和成功率。
+- 研发 Tool Registry & Router 组件，基于 Qdrant 向量检索 + HyDE + Multi-Query + LLM Rerank，在 1000+ Tools 中自动匹配最优工具组合，提升 Agent 决策准确率与 Tool Call 成功率。
+- 设计 Human-in-the-Loop 控制体系，支持任务暂停、人工编辑、审批确认与恢复执行，用于高风险操作与质量校验，使自动化 Agent 能安全应用于生产级业务流程。
+- 设计并实现 Agent-to-Browser 执行通道，基于 MCP Tool Call + Chrome Extension 驱动真实浏览器行为，支持自动交互与结构化采集，解决传统爬虫在 社媒平台、反爬环境与登录态数据 场景下的可用性问题。
+- 构建 AI Sheets MCP 执行层，通过 MCP 封装 Google Sheets API，支持 Agent 批量读取与更新数据，并提供 AI 数据增强、公式生成与图表生成的能力，并支持将 Agent 处理结果导出至 Google Sheet，实现更灵活的数据存储与使用。
 
 ### KOL.AI (X AI创作平台)
 
 **全栈工程师　2024.08 - 2025.03**
 
 - 基于 AutoGen 框架设计并实现多 Agent 写作系统，支持 Agent 创建、编辑、版本回溯及 14+ 工具插件管理，实现低代码可视化配置。
-- 设计并实现 X AI 写作引擎，支持用户自定义人设、写作风格及受众群体，可一键 fork 推特博主风格生成个性化推文，并基于用户知识库、Prompt 和历史推文生成定制化内容，同时自动抓取热门话题提升相关性。
-- 构建 写作灵感引擎，实时监听多个 X KOL 与新闻数据源，自动分析并生成每日推文建议，提升内容创作效率。
-- 设计 RLHF 反馈引擎，收集用户对 AI 生成推文的意见，用于持续优化生成效果。
+- 构建 Trends、Web Search、News、Tweets、Memory 等 MCP 工具，为 AutoGen 多 Agent 写作系统提供稳定可靠的运行时能力，提升内容生成效率与系统稳定性。
+- 实现 一键 Fork KOL 功能，用户输入 X username 后，自动创建对应人设、写作风格及选题偏好，自动配置所需 MCP 工具，并抓取目标用户历史推文，将爆款内容转化为写作模板，使用户可快速生成模仿该 KOL 风格的高质量推文。
+- 构建 自动养号与互动系统，支持 Agent 自动关注同领域 KOL，实时监听目标 KOL 新推文并快速生成评论，同时可每日自动发布推文，帮助用户获取流量并提升账号活跃度。
+- 使用 Mem0 构建记忆引擎，记录用户历史推文主题与内容，支持多 Agent 查询历史记忆，避免重复选题并提升内容多样性与创作效率。
 - 实现 AI 任务执行日志可视化系统，支持实时追踪模型调用、Token 消耗、执行耗时及中间内容，实现全链路可追溯与高效调试。
-- 构建 Twitter 账号全生命周期管理系统，覆盖账号管理、AI 内容生成、定时发布、自动评论/关注及安全风控，支持多账号批量运营。
 - 实现 多源热点数据爬取系统，每日抓取 X 热门话题、Google Trends、Medium 热文等，统一清洗聚合为 AI 内容创作提供灵感素材。
 
 
@@ -47,7 +48,7 @@ title: 简历
 **后端工程师　2023.10 – 2024.08**
 
 - 设计并实现**核心活动引擎与任务系统**，构建统一事件驱动架构支持概率抽奖、拼团、定时开奖、裂变任务、俄罗斯转盘等 **8+ 活动玩法**；实现 Telegram 群验证、发言检测、邀请链追踪、链上行为验证等 **20+ 任务类型**，支撑平台 **3 个月从 0 增长至 100 万用户**，日活峰值 **15 万+**
-- 设计并实现**跨链钱包充值提现系统**，构建统一抽象层支持 TON 与 **10+ 主流 EVM 链**（Ethereum、BSC、Polygon 等）；通过链上事件监听 + 区块确认机制实现自动到账，充提时效 **< 3 分钟**，交易成功率 **99.8%**
+- 设计并实现**跨链钱包充值提现系统**，构建统一抽象层支持 TON 与 **5+ 主流 EVM 链**（Ethereum、BSC、Polygon 等）；通过链上事件监听 + 区块确认机制实现自动到账，充提时效 **< 3 分钟**，交易成功率 **99.8%**
 - 设计并实现 **AI 智能客服 SaaS 平台**，基于 RAG + LLM 构建多租户 Telegram Bot 系统，支持品牌方上传项目知识库、自定义回复风格与话术模板、可视化配置工具开关（联网搜索、实时新闻等）；通过向量检索 + 上下文记忆实现精准问答，并提供 Q&A 测试集验证知识库质量
 - 设计并实现 **AI 智能风控审核系统**，基于用户行为图谱分析与资金流水模式识别，构建多维度异常检测模型；自动识别羊毛党团伙的异常提现行为，并及时告警通知运维人员
 - 设计并实现运营后台（React + NestJS），实现活动一键创建/编辑/上下架、资金归集与分发、实时数据大屏等功能，将运营发活动时间**从 2 小时缩短至 5 分钟**，运营效率提升超 **90%**
@@ -74,13 +75,13 @@ title: 简历
 ## 专业技能
 
 - **编程语言**：Python、Typescript、Java
-- **大模型 & Agent**：Multi-Agent、Tool Calling、ReAct、RAG、Context Engineering、Prompt Engineering
+- **大模型 & Agent**：Multi-Agent、Tool Call、ReAct、RAG、Context Engineering、Prompt Engineering
 - **大数据 & 基础设施**：Trino、Doris、Iceberg、Flink、Redis、Elasticsearch、MongoDB、MySQL、PostgreSQL
 - **区块链**：EVM/非EVM 全链数据管道、智能合约交互、钱包系统
 - **运维**：Linux、Docker、Kubernetes、Tencent Cloud/GCP
 
-## 个人评价
+## 个人优势
 
-- 拥有 3 年以上大语言模型（LLM）实战经验，熟悉 Vibe Coding，日常习惯使用 AI 自动化重复性任务与辅助脑力工作
+- 具备多次从 0 到 1 的项目经验，进行多领域技术攻坚，曾负责 AI Agent，大数据，区块链等前沿领域的主力开发
+- 拥有 3 年以上 LLM 实战经验，熟悉 Vibe Coding，日常习惯使用 AI 做分析决策和编码
 - 热衷技术创新，对新兴工具和前沿技术保持强烈好奇心和学习热情
-- 自驱力强，注重代码质量与产品体验，在 AI 时代追求高标准和良好品味
